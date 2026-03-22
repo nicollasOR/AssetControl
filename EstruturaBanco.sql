@@ -1,3 +1,4 @@
+--
 CREATE DATABASE ProjetoPatrimonios
 GO 
 USE ProjetoPatrimonios
