@@ -1,0 +1,111 @@
+﻿using AssetControlAPI_.Applications.DTOs;
+using AssetControlAPI_.Applications.DTOs.AreaDTO;
+using AssetControlAPI_.Applications.Regras;
+using AssetControlAPI_.Domains;
+using AssetControlAPI_.Exceptions;
+using AssetControlAPI_.Interface;
+
+namespace AssetControlAPI_.Applications.Services
+{
+    public class AreaService
+    {
+        private readonly IAreaRepository _repository;
+        public AreaService(IAreaRepository repository) => _repository = repository;
+
+        private static ListarAreaDTO ListarDTO(Area area)
+        {
+            ListarAreaDTO lerDTO = new ListarAreaDTO()
+            {
+                AreaId = area.AreaId,
+                AreaNome = area.NomeArea
+            };
+
+            return lerDTO;
+        }
+
+        public List<ListarAreaDTO> Listar()
+        {
+            List<Area> list = _repository.Listar();
+            List<ListarAreaDTO> listarDTO = list.Select(listagem => new ListarAreaDTO
+            {
+                AreaId = listagem.AreaId,
+                AreaNome = listagem.NomeArea
+            }).ToList();
+
+            return listarDTO;
+        }
+
+
+
+        public ListarAreaDTO ObterPorGuid(Guid guid)
+        {
+            Area area = _repository.ObterPorGuid(guid);
+            if (area == null)
+                throw new DomainException("Area não existe");
+
+            ListarAreaDTO areaDto = new ListarAreaDTO
+            {
+                AreaId = area.AreaId,
+                AreaNome = area.NomeArea
+            };
+
+            return areaDto;
+
+
+        }
+
+
+        public ListarAreaDTO ObterPorNome(string nomeArea)
+        {
+            Area area = _repository.ObterPorNome(nomeArea);
+            if (area == null)
+                throw new DomainException("Nome Inválido");
+
+            ListarAreaDTO areaDTO = new ListarAreaDTO
+            {
+                AreaNome = area.NomeArea,
+                AreaId = area.AreaId
+            };
+            return areaDTO;
+        }
+
+
+        public void Adicionar(CriarAreaDTO areaDTO)
+        {
+            ValidarCriacaoDTO.ValidarNome(areaDTO.NomeArea);
+
+            Area areaExistente = _repository.ObterPorNome(areaDTO.NomeArea);
+            if (areaExistente != null)
+                throw new DomainException("Já existe uma área com este nome");
+            Area area = new Area
+            {
+                /*
+                 * Caso nosso banco não estivesse com um new id no banco, ela ficaria assim:
+                 AreaId = Guid.NewGuid(),
+                 */
+                NomeArea = areaDTO.NomeArea
+            };
+            _repository.Adicionar(area);
+
+        }
+
+        public void Atualizar(Guid guid, ListarAreaDTO areaDTO)
+        {
+            ValidarCriacaoDTO.ValidarNome(areaDTO.AreaNome);
+            Area areaBanco = _repository.ObterPorGuid(guid);
+            Area areaExistente = _repository.ObterPorNome(areaDTO.AreaNome);
+
+            if (areaBanco == null)
+               throw new DomainException("Esta área não foi encontrada");
+            if (areaExistente != null)
+                throw new DomainException("Já existe uma área cadastrada com este nome");
+
+            areaBanco.NomeArea = areaDTO.AreaNome;
+
+            _repository.Atualizar(areaBanco);
+
+
+
+        }
+    }
+}

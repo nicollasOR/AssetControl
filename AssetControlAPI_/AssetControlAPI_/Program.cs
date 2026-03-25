@@ -1,9 +1,12 @@
 using DotNetEnv;
 using AssetControlAPI_.Contexts;
 using Microsoft.EntityFrameworkCore;
+using AssetControlAPI_.Interface;
+using AssetControlAPI_.Repository;
+using AssetControlAPI_.Applications.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+Env.Load();
 string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")!;
 builder.Services.AddDbContext<AssetDBContext>(options => options.UseSqlServer(connectionString));
 
@@ -12,6 +15,9 @@ builder.Services.AddDbContext<AssetDBContext>(options => options.UseSqlServer(co
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IAreaRepository, AreaRepository>();
+builder.Services.AddScoped<AreaService>();
 
 var app = builder.Build();
 
