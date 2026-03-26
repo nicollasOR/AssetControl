@@ -34,7 +34,7 @@ namespace AssetControlAPI_.Controllers
             try
             {
                 ListarAreaDTO are = _service.ObterPorGuid(id);
-                return Ok(id);
+                return Ok(are);
             }
             catch (DomainException ex)
             {
@@ -75,7 +75,7 @@ namespace AssetControlAPI_.Controllers
         }
 
         [HttpPut("id/{guid}")]
-        public ActionResult Atualizar(Guid guid, ListarAreaDTO areaDTO)
+        public ActionResult Atualizar(Guid guid, CriarAreaDTO areaDTO)
         {
             try
             {

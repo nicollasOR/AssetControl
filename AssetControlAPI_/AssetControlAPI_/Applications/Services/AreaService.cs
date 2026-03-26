@@ -73,7 +73,7 @@ namespace AssetControlAPI_.Applications.Services
         public void Adicionar(CriarAreaDTO areaDTO)
         {
             ValidarCriacaoDTO.ValidarNome(areaDTO.NomeArea);
-
+            
             Area areaExistente = _repository.ObterPorNome(areaDTO.NomeArea);
             if (areaExistente != null)
                 throw new DomainException("Já existe uma área com este nome");
@@ -89,18 +89,18 @@ namespace AssetControlAPI_.Applications.Services
 
         }
 
-        public void Atualizar(Guid guid, ListarAreaDTO areaDTO)
+        public void Atualizar(Guid guid, CriarAreaDTO areaDTO)
         {
-            ValidarCriacaoDTO.ValidarNome(areaDTO.AreaNome);
+            ValidarCriacaoDTO.ValidarNome(areaDTO.NomeArea);
             Area areaBanco = _repository.ObterPorGuid(guid);
-            Area areaExistente = _repository.ObterPorNome(areaDTO.AreaNome);
+            Area areaExistente = _repository.ObterPorNome(areaDTO.NomeArea);
 
             if (areaBanco == null)
                throw new DomainException("Esta área não foi encontrada");
             if (areaExistente != null)
                 throw new DomainException("Já existe uma área cadastrada com este nome");
 
-            areaBanco.NomeArea = areaDTO.AreaNome;
+            areaBanco.NomeArea = areaDTO.NomeArea;
 
             _repository.Atualizar(areaBanco);
 
