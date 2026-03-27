@@ -21,9 +21,12 @@ namespace AssetControlAPI_.Repository
             return _context.Localizacao.Find(guid);
         }
 
-        public Localizacao ObterPorNome(string nome)
+        public Localizacao ObterPorNome(string nome, Guid areaId)
         {
-             return _context.Localizacao.FirstOrDefault(nomeAux => nomeAux.NomeLocalizacao.ToLower() == nome.ToLower());
+             return _context.Localizacao.FirstOrDefault
+                (
+                localAux => localAux.NomeLocalizacao.ToLower() == nome.ToLower() 
+                && localAux.AreaId == areaId);
         }
 
         public bool AreaExiste(Guid areaId)

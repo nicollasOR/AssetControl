@@ -8,7 +8,7 @@ namespace AssetControlAPI_.Interface
         public List<Localizacao> Listar();
         public Localizacao ObterPorGuid(Guid guid);
 
-        public Localizacao ObterPorNome(string nome);
+        public Localizacao ObterPorNome(string nome, Guid areaId);
 
         public bool AreaExiste(Guid areaId);
 

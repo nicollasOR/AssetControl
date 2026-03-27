@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|c:\\users\\54930515831\\desktop\\assetcontrol\\assetcontrolapi_\\assetcontrolapi_\\applications\\services\\areaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|solutionrelative:assetcontrolapi_\\applications\\services\\areaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|c:\\users\\54930515831\\desktop\\assetcontrol\\assetcontrolapi_\\assetcontrolapi_\\interface\\icidaderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|solutionrelative:assetcontrolapi_\\interface\\icidaderepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|c:\\users\\54930515831\\desktop\\assetcontrol\\assetcontrolapi_\\assetcontrolapi_\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|solutionrelative:assetcontrolapi_\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|c:\\users\\54930515831\\desktop\\assetcontrol\\assetcontrolapi_\\assetcontrolapi_\\.env||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{0F672560-8C04-38AF-086D-09C7AE06B3EC}|AssetControlAPI_\\AssetControlAPI_.csproj|solutionrelative:assetcontrolapi_\\.env||{8B382828-6202-11D1-8870-0000F87579D2}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AreaService.cs",
+              "DocumentMoniker": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\Applications\\Services\\AreaService.cs",
+              "RelativeDocumentMoniker": "AssetControlAPI_\\Applications\\Services\\AreaService.cs",
+              "ToolTip": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\Applications\\Services\\AreaService.cs",
+              "RelativeToolTip": "AssetControlAPI_\\Applications\\Services\\AreaService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T11:12:17.958Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ICidadeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\Interface\\ICidadeRepository.cs",
+              "RelativeDocumentMoniker": "AssetControlAPI_\\Interface\\ICidadeRepository.cs",
+              "ToolTip": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\Interface\\ICidadeRepository.cs",
+              "RelativeToolTip": "AssetControlAPI_\\Interface\\ICidadeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T11:10:52.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\.gitignore",
+              "RelativeDocumentMoniker": "AssetControlAPI_\\.gitignore",
+              "ToolTip": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\.gitignore",
+              "RelativeToolTip": "AssetControlAPI_\\.gitignore",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-27T11:10:33.443Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": ".env",
+              "DocumentMoniker": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\.env",
+              "RelativeDocumentMoniker": "AssetControlAPI_\\.env",
+              "ToolTip": "C:\\Users\\54930515831\\Desktop\\AssetControl\\AssetControlAPI_\\AssetControlAPI_\\.env",
+              "RelativeToolTip": "AssetControlAPI_\\.env",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-03-27T11:10:20.103Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

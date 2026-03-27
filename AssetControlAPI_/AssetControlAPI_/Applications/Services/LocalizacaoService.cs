@@ -65,6 +65,10 @@ namespace AssetControlAPI_.Applications.Services
         public void  Adicionar(CriarLocalizacaoDTO criarDTO)
         {
             ValidarCriacaoDTO.ValidarNome(criarDTO.nomeLocal);
+            Localizacao localExiste = _repository.ObterPorNome(criarDTO.nomeLocal, criarDTO.AreaId);
+            if (localExiste != null)
+                throw new DomainException("Já existe um local cadastrado com esse nome área");
+
             if (_repository.AreaExiste(criarDTO.AreaId) == false)
                 throw new DomainException("A área informada não existe");
             Localizacao localizacao = new Localizacao
@@ -84,6 +88,11 @@ namespace AssetControlAPI_.Applications.Services
         {
             ValidarCriacaoDTO.ValidarNome(listarDTO.nomeLocal);
             Localizacao localizacaoBanco = _repository.ObterPorGuid(guid);
+
+            Localizacao localExiste = _repository.ObterPorNome(listarDTO.nomeLocal, listarDTO.AreaId);
+            if (localExiste != null)
+                throw new DomainException("Já existe um local cadastrado com o nome dessa área");
+
 
             if (localizacaoBanco == null)
                 throw new DomainException("Localização não encontrada");
