@@ -2,9 +2,9 @@
 {
     public class ListarCidadeDTO
     {
-        Guid cidadeId { get; set; } = Guid.Empty;
+        public Guid cidadeId { get; set; } = Guid.Empty;
 
-        string cidadeNome { get; set; } = string.Empty;
-        string estadoNome { get; set; } = string.Empty;
+        public string cidadeNome { get; set; } = string.Empty;
+        public string estadoNome { get; set; } = string.Empty;
     }
 }

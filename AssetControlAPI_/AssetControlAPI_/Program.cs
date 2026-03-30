@@ -17,6 +17,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IBairroRepository, BairroRepository>();
+builder.Services.AddScoped<BairroService>();
+
+builder.Services.AddScoped<ICidadeRepository, CidadeRepository>();
+builder.Services.AddScoped<CidadeService>();
+
 builder.Services.AddScoped<IAreaRepository, AreaRepository>();
 builder.Services.AddScoped<AreaService>();
 

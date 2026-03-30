@@ -12,6 +12,4 @@ public partial class Cidade
     public string? Estado { get; set; }
 
     public virtual ICollection<Bairro> Bairro { get; set; } = new List<Bairro>();
-
-    public virtual ICollection<Endereco> Endereco { get; set; } = new List<Endereco>();
 }

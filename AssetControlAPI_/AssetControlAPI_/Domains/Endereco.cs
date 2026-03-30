@@ -15,13 +15,9 @@ public partial class Endereco
 
     public string CEP { get; set; } = null!;
 
-    public Guid CidadeId { get; set; }
-
     public Guid BairroId { get; set; }
 
     public virtual Bairro Bairro { get; set; } = null!;
-
-    public virtual Cidade Cidade { get; set; } = null!;
 
     public virtual ICollection<Usuario> Usuario { get; set; } = new List<Usuario>();
 }

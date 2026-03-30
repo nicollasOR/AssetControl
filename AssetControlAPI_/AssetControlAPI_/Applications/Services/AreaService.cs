@@ -1,5 +1,6 @@
 ﻿using AssetControlAPI_.Applications.DTOs;
 using AssetControlAPI_.Applications.DTOs.AreaDTO;
+using AssetControlAPI_.Applications.DTOs.BairroDTO;
 using AssetControlAPI_.Applications.Regras;
 using AssetControlAPI_.Domains;
 using AssetControlAPI_.Exceptions;
@@ -12,16 +13,7 @@ namespace AssetControlAPI_.Applications.Services
         private readonly IAreaRepository _repository;
         public AreaService(IAreaRepository repository) => _repository = repository;
 
-        private static ListarAreaDTO ListarDTO(Area area)
-        {
-            ListarAreaDTO lerDTO = new ListarAreaDTO()
-            {
-                AreaId = area.AreaId,
-                AreaNome = area.NomeArea
-            };
 
-            return lerDTO;
-        }
 
         public List<ListarAreaDTO> Listar()
         {
@@ -106,6 +98,21 @@ namespace AssetControlAPI_.Applications.Services
 
 
 
+        }
+
+        internal void Adicionar(ListarAreaDTO areaDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Atualizar(Guid guid, ListarAreaDTO areaDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void Atualizar(Guid guid, CriarBairroDTO areaDTO)
+        {
+            throw new NotImplementedException();
         }
     }
 }

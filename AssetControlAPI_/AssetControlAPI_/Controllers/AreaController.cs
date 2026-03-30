@@ -1,4 +1,5 @@
 ﻿using AssetControlAPI_.Applications.DTOs.AreaDTO;
+using AssetControlAPI_.Applications.DTOs.BairroDTO;
 using AssetControlAPI_.Applications.Services;
 using AssetControlAPI_.Exceptions;
 using Microsoft.AspNetCore.Http;

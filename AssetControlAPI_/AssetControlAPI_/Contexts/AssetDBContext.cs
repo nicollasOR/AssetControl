@@ -46,9 +46,9 @@ public partial class AssetDBContext : DbContext
 
     public virtual DbSet<Usuario> Usuario { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AssetDB;Trusted_Connection=True;TrustServerCertificate=True");
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AssetDB;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -117,11 +117,6 @@ public partial class AssetDBContext : DbContext
                 .HasForeignKey(d => d.BairroId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("EnderecoBairro_ID_FK");
-
-            entity.HasOne(d => d.Cidade).WithMany(p => p.Endereco)
-                .HasForeignKey(d => d.CidadeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("EnderecoCidade_ID_FK");
         });
 
         modelBuilder.Entity<Localizacao>(entity =>

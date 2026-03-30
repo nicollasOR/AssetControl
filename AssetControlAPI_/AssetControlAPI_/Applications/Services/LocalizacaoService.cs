@@ -12,18 +12,7 @@ namespace AssetControlAPI_.Applications.Services
         private readonly ILocalizacaoRepository _repository;
         public LocalizacaoService(ILocalizacaoRepository repository) => _repository = repository;
 
-        private static ListarLocalizacaoDTO ListarDTO(Localizacao localizacao)
-        {
-            ListarLocalizacaoDTO lerDTO = new ListarLocalizacaoDTO()
-            {
-                AreaId = localizacao.AreaId,
-                localSAP = localizacao.LocalizacaoSAP,
-                nomeLocal = localizacao.NomeLocalizacao,
-                DescricaoSAP = localizacao.DescricaoSAP,
-            };
 
-            return lerDTO;
-        }
 
         public List<ListarLocalizacaoDTO> Listar()
         {
