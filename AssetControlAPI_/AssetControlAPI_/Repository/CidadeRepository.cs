@@ -42,7 +42,6 @@ namespace AssetControlAPI_.Interface
             Cidade cidadeBanco = _context.Cidade.Find(cidade.CidadeId);
 
             cidadeBanco.NomeCidade = cidade.NomeCidade;
-            cidadeBanco.Endereco = cidade.Endereco;
             cidadeBanco.Estado = cidade.Estado;
 
 

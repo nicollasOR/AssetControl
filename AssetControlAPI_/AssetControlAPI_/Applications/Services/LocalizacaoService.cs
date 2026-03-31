@@ -1,4 +1,5 @@
-﻿using AssetControlAPI_.Applications.DTOs.LocalizacaoDTO;
+﻿
+using AssetControlAPI_.Applications.DTOs.LocalizacaoDTO;
 using AssetControlAPI_.Applications.Regras;
 using AssetControlAPI_.Domains;
 using AssetControlAPI_.Exceptions;

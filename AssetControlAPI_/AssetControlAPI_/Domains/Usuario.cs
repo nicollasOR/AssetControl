@@ -27,6 +27,10 @@ public partial class Usuario
 
     public Guid TipoUsuarioId { get; set; }
 
+    public bool PrimeiroAcesso { get; set; }
+
+    public string NIF { get; set; } = null!;
+
     public virtual Cargo Cargo { get; set; } = null!;
 
     public virtual Endereco Endereco { get; set; } = null!;

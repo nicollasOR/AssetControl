@@ -17,6 +17,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+builder.Services.AddScoped<EnderecoService>();
+
 builder.Services.AddScoped<IBairroRepository, BairroRepository>();
 builder.Services.AddScoped<BairroService>();
 
@@ -28,6 +31,9 @@ builder.Services.AddScoped<AreaService>();
 
 builder.Services.AddScoped<ILocalizacaoRepository, LocalizacaoRepository>();
 builder.Services.AddScoped<LocalizacaoService>();
+
+builder.Services.AddScoped<IUsuarioRepository, uUsuarioRepository>();
+builder.Services.AddScoped<UsuarioService>();
 
 var app = builder.Build();
 

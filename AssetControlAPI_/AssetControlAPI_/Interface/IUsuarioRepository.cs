@@ -2,7 +2,9 @@
 
 namespace AssetControlAPI_.Interface
 {
-    public interface ISolicitacaoTransferenciaRepository
+    public interface IUsuarioRepository
     {
+        public List<Usuario> Listar();
+
     }
 }
