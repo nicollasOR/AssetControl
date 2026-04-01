@@ -35,6 +35,13 @@ builder.Services.AddScoped<LocalizacaoService>();
 builder.Services.AddScoped<IUsuarioRepository, uUsuarioRepository>();
 builder.Services.AddScoped<UsuarioService>();
 
+builder.Services.AddScoped<ICargoRepository, CargoRepository>();
+builder.Services.AddScoped<CargoService>();
+
+builder.Services.AddScoped<IPatrimonioRepository, PatrimonioRepository>();
+builder.Services.AddScoped<PatrimonioService>();
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

@@ -71,6 +71,8 @@ namespace AssetControlAPI_.Applications.Services
             ValidarCriacaoDTO.ValidarNome(criarDTOs.nomeBairro);
 
             Bairro? bairroBanco = _repository.ObterPorNomeEstado(criarDTOs.nomeBairro, criarDTOs.cidadeId);
+            if (bairroBanco == null)
+                throw new DomainException("Bairro não encontrado!");
 
             Bairro criarDTO = new Bairro
             {

@@ -100,19 +100,6 @@ namespace AssetControlAPI_.Applications.Services
 
         }
 
-        internal void Adicionar(ListarAreaDTO areaDTO)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void Atualizar(Guid guid, ListarAreaDTO areaDTO)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void Atualizar(Guid guid, CriarBairroDTO areaDTO)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }
