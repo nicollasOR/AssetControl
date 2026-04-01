@@ -21,7 +21,82 @@ namespace AssetControlAPI_.Controllers
                 return BadRequest(usuarios);
 
             return Ok(usuarios);
+        }
 
+        [HttpGet("id/{id}")]
+        public ActionResult<ListarUsuarioDTO> BuscarPorId(Guid id)
+        {
+
+            try
+            {
+            ListarUsuarioDTO listar = _service.BuscarPorId(id);
+            return Ok(listar);
+            }
+
+            catch(DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("nome/{nome}")]
+        public ActionResult<ListarUsuarioDTO> BuscarPorNome(string nome)
+        {
+            try
+            {
+            ListarUsuarioDTO listar = _service.BuscarPorNome(nome);
+            return Ok(listar);
+            }
+
+            catch(DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("NIF/{NIF}")]
+        public ActionResult<ListarUsuarioDTO> BuscarPorNIF(string NIF)
+        {
+            try
+            {
+            ListarUsuarioDTO listar = _service.BuscarPorNIF(NIF);
+            return Ok(listar);
+            }
+
+            catch(DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult<CriarUsuarioDTO> Adicionar(CriarUsuarioDTO criarDTO)
+        {
+            try
+            {
+                _service.Adicionar(criarDTO);
+                return Created();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public ActionResult<ListarUsuarioDTO> Atualizar(Guid id, ListarUsuarioDTO lerDTO)
+        {
+            try
+            {
+                _service.Atualizar(id, lerDTO);
+                return NoContent();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }

@@ -13,13 +13,81 @@ namespace AssetControlAPI_.Controllers
         public TipoUsuarioController(TipoUsuarioService service) => _service = service;
 
 
-        //[HttpGet]
+        [HttpGet]
+        public ActionResult <List<ListarTipoUsuario>> Listar()
+        {
+            List<ListarTipoUsuario> listar = _service.Listar();
+            if(listar == null)
+                return NotFound(listar);
 
-        //[HttpGet("id/{guid}")]
+                return Ok(listar);
+        }
 
-        //[HttpGet("nome/{nome}")]
-        //[HttpPost]
-        //[HttpPut]
+        [HttpGet("id/{guid}")]
+        public ActionResult <ListarTipoUsuario> BuscarPorId(Guid guid)
+        {
+            try
+            {
+                ListarTipoUsuario listar = _service.ObterPorGuid(guid);
+                return Ok(listar);
+            }
+
+            catch(DomainException ex)
+            {
+              return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("nome/{nome}")]
+        public ActionResult <ListarTipoUsuario> BuscarPorNome(string nome)
+        {
+            try
+            {
+                ListarTipoUsuario listar = _service.ObterPorNome(nome);
+                return Ok(listar);
+            }
+
+            catch(DomainException ex)
+            {
+              return BadRequest(ex.Message);
+            }
+            
+        }
+
+
+        [HttpPost]
+        public ActionResult <CriarTipoUsuarioDTO> Adicionar(CriarTipoUsuarioDTO criarDTO)
+        {
+            try
+            {
+                _service.Adicionar(criarDTO);
+                return NoContent();
+            }
+
+            catch(DomainException ex)
+            {
+              return BadRequest(ex.Message);
+            }
+        }
+
+
+
+        [HttpPut]
+        public ActionResult <ListarTipoUsuario> Adicionar(Guid id, ListarTipoUsuario listarDTO)
+        {
+            try
+            {
+                _service.Adicionar(id, listarDTO);
+                return NoContent();
+            }
+
+            catch(DomainException ex)
+            {
+              return BadRequest(ex.Message);
+            }
+        }
+
 
     }
 }
