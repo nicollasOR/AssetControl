@@ -11,20 +11,23 @@ namespace AssetControlAPI_.Applications.Services
     {
         private readonly IEnderecoRepository _repository;
         public EnderecoService(IEnderecoRepository repository) => _repository = repository;
-
+        private static LerEnderecoDTO lerDTO(Endereco endereco)
+        {
+            return new LerEnderecoDTO
+            {
+                enderecoId = endereco.EnderecoId,
+                Logradoura = endereco.Logradoura,
+                Complemento = endereco.Complemento,
+                CEP = endereco.CEP,
+                bairroId = endereco.BairroId
+            };
+            
+        }
         public List<LerEnderecoDTO> Listar()
         {
             List<Endereco> Enderecos = _repository.Listar();
 
-            List<LerEnderecoDTO> listarDTO = Enderecos.Select(varAux => new LerEnderecoDTO
-            { 
-              Logradoura = varAux.Logradoura,
-              bairroId = varAux.BairroId,
-              CEP = varAux.CEP,
-              Complemento = varAux.Complemento,
-              enderecoId = varAux.EnderecoId
-            }).ToList();
-
+            List<LerEnderecoDTO> listarDTO = Enderecos.Select(varAux => lerDTO(varAux)).ToList();
             return listarDTO;
         }
 
@@ -34,33 +37,28 @@ namespace AssetControlAPI_.Applications.Services
             if (endereco == null)
                 throw new DomainException("não existe este endereço");
 
-            LerEnderecoDTO listarDTO = new LerEnderecoDTO
-            {
-                enderecoId = endereco.EnderecoId,
-                CEP =endereco.CEP,
-                Complemento = endereco.Complemento,
-                bairroId = endereco.BairroId,
-                Logradoura = endereco.Logradoura
-
-            };
+            LerEnderecoDTO listarDTO = lerDTO(endereco);
 
             return listarDTO;
         }
 
-        public LerEnderecoDTO BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId)
+        public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
         {
-            Endereco? enderecoBairroId = _repository.BuscarPorLogradouroENumero(logradouro, numero, bairroId);
+            Endereco? endereco = _repository.BuscarPorLogradouro(logradoura, numero, bairroId);
+            if (endereco == null)
+                throw new DomainException("Endereço não encontrado");
+
+            LerEnderecoDTO lerDTOs = lerDTO(endereco);
+            return lerDTOs;
+        }
+
+
+        public LerEnderecoDTO BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId)
+        {
+            Endereco? enderecoBairroId = _repository.BuscarPorLogradouroENumero(logradouro, numero, bairroId, enderecoId);
             if (enderecoBairroId == null)
                 throw new DomainException("Este endereço não existe");
-
-            LerEnderecoDTO listarDTO = new LerEnderecoDTO
-            {
-                enderecoId = enderecoBairroId.EnderecoId,
-                CEP = enderecoBairroId.CEP,
-                Logradoura = enderecoBairroId.Logradoura,
-                Complemento = enderecoBairroId.Complemento,
-                bairroId = enderecoBairroId.BairroId
-            };
+            LerEnderecoDTO listarDTO = lerDTO(enderecoBairroId);
 
             return listarDTO;
 
@@ -85,7 +83,7 @@ namespace AssetControlAPI_.Applications.Services
             };
 
             _repository.Adicionar(enderecoAux);
-
+            
             //if(endereco != null && endereco.Bairro != criarDTO.bairroId)
         
         }

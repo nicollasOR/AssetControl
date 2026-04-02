@@ -4,7 +4,8 @@ using AssetControlAPI_.Interface;
 
 namespace AssetControlAPI_.Repository
 {
-    public class uUsuarioRepository : IUsuarioRepository
+    public class uUsuarioRepository : 
+        IUsuarioRepository
     {
 
         private readonly AssetDBContext _context;
@@ -14,21 +15,44 @@ namespace AssetControlAPI_.Repository
         {
             return _context.Usuario.OrderBy(varAux => varAux.Nome).ToList();
         }
-      public Usuario BuscarPorNome(string nome)
-      {
-         return _context.Usuario.Find(nome);
-      }
-     public Usuario BuscarPorId(Guid id)
-     {
-        return _context.Usuario.Find(id);
-     }
+        public Usuario BuscarPorNome(string nome)
+        {
+            return _context.Usuario.Find(nome);
+        }
+        public Usuario BuscarPorId(Guid id)
+        {
+            return _context.Usuario.Find(id);
+        }
 
-     public Usuario BuscarPorNIF(string NIF)
-     {
-        return _context.Usuario.Find(NIF);
-     } 
+        public Usuario BuscarPorNIF(string NIF)
+        {
+            return _context.Usuario.Find(NIF);
+        }
+        public Usuario BuscarPor_ID_NIF_Nome(Guid? id, string NIF, string Nome)
+        {
+            var consulta = _context.Usuario.AsQueryable();
 
-     public bool UsuarioAtivo(bit Ativo)
+            if(id.HasValue)
+                consulta = consulta.Where(usuario => usuario.UsuarioId != id.Value);
+
+            return consulta.FirstOrDefault
+                (
+                usuario =>
+                usuario.UsuarioId == id &&
+                usuario.NIF.ToLower() == NIF.ToLower() &&
+                usuario.Nome.ToLower() == Nome.ToLower()
+                );
+        }
+
+        public bool enderecoExiste(Guid? enderecoId)
+        {
+            return _context.Usuario.Any(varAux => varAux.EnderecoId == enderecoId);
+        }
+        public bool cargoExiste(Guid? cargoId)
+        {
+            return _context.Usuario.Any(varAux => varAux.CargoId == cargoId);
+        }
+        public bool UsuarioAtivo(bool Ativo)
      {
         return _context.Usuario.Any(varAux => varAux.Ativo == Ativo);
      }
@@ -40,7 +64,7 @@ namespace AssetControlAPI_.Repository
 
      public bool nifExiste(string NIF)
      {
-        return _context.Usuario.Any(varAux => varAux.NIF = NIF);
+        return _context.Usuario.Any(varAux => varAux.NIF == NIF);
      }
     public void Adicionar(Usuario usuario)
     {
@@ -53,22 +77,24 @@ namespace AssetControlAPI_.Repository
         if(usuario == null)
         return;
 
-        // Usuario usuarioBanco = _context.Usuario.Find(usuario.UsuarioId);
-        // usuarioBanco.Nome = usuario.Nome;
-        // usuarioBanco.RG = usuario.RG;
-        // usuarioBanco.CPF = usuario.CPF;
-        // usuarioBanco.Email = usuario.Email;
-        // usuarioBanco.CarteiraTrabalho = usuario.CarteiraTrabalho;
-        // usuarioBanco.Senha = usuario.Senha;
-        // usuarioBanco.Ativo = usuario.Ativo;
-        // usuarioBanco.EnderecoId = usuario.EnderecoId;
-        // usuarioBanco.CargoId = usuario.CargoId;
-        // usuarioBanco.TipoUsuarioId = usuario.TipoUsuarioId;
-        // usuarioBanco.PrimeiroAcesso = usuario.PrimeiroAcesso;
-        // usuarioBanco.NIF = usuario.NIF;
-        
-        // _context.Usuario.Update(usuario);
-        _context.SaveChanges();
+            Usuario usuarioBanco = _context.Usuario.Find(usuario.UsuarioId);
+            if (usuarioBanco == null)
+                return;
+            usuarioBanco.Nome = usuario.Nome;
+            usuarioBanco.RG = usuario.RG;
+            usuarioBanco.CPF = usuario.CPF;
+            usuarioBanco.Email = usuario.Email;
+            usuarioBanco.CarteiraTrabalho = usuario.CarteiraTrabalho;
+            usuarioBanco.Senha = usuario.Senha;
+            usuarioBanco.Ativo = usuario.Ativo;
+            usuarioBanco.EnderecoId = usuario.EnderecoId;
+            usuarioBanco.CargoId = usuario.CargoId;
+            usuarioBanco.TipoUsuarioId = usuario.TipoUsuarioId;
+            usuarioBanco.PrimeiroAcesso = usuario.PrimeiroAcesso;
+            usuarioBanco.NIF = usuario.NIF;
+
+            _context.Usuario.Update(usuario);
+            _context.SaveChanges();
     }
 
     }

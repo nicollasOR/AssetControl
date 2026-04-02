@@ -39,7 +39,7 @@ namespace AssetControlAPI_.Controllers
                 return NotFound(ex.Message);
             }
         }
-        [HttpGet("id/{numeroPatrimonio}")]
+        [HttpGet("id/{numeroPatrimonio}/{patrimonioId?}")]
         public ActionResult<ListarPatrimonioDTO> BuscarPorNumeroPatrimonio(string numeroPatrimonio, Guid? patrimonioId = null)
         {
             try
@@ -55,7 +55,7 @@ namespace AssetControlAPI_.Controllers
         }
 
         [HttpPost]
-        public ActionResult<CriarPatrimonioDTO> Adicionar(CriarPatrimonioDTO criarDTO)
+        public ActionResult<CriarPatrimonioDTO> Adicionar(ListarPatrimonioDTO criarDTO)
         {
             try
             {

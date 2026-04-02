@@ -13,18 +13,20 @@ namespace AssetControlAPI_.Applications.Services
         private readonly IAreaRepository _repository;
         public AreaService(IAreaRepository repository) => _repository = repository;
 
-
+        private static ListarAreaDTO listarDTO(Area area)
+        {
+            return new ListarAreaDTO
+            {
+                AreaId = area.AreaId,
+                AreaNome = area.NomeArea
+            };
+        }
 
         public List<ListarAreaDTO> Listar()
         {
             List<Area> list = _repository.Listar();
-            List<ListarAreaDTO> listarDTO = list.Select(listagem => new ListarAreaDTO
-            {
-                AreaId = listagem.AreaId,
-                AreaNome = listagem.NomeArea
-            }).ToList();
-
-            return listarDTO;
+            List<ListarAreaDTO> listarAreaDTO = list.Select(listagem => listarDTO(listagem)).ToList();
+            return listarAreaDTO;
         }
 
 

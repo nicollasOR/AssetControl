@@ -5,12 +5,11 @@ namespace AssetControlAPI_.Interface
     public interface IStatusPatrimonioRepository
     {
 
-        List<StatusPatrimonio> Listar();
-        StatusPatrimonio BuscarPorId(Guid statusPatrimonioId);
-        StatusPatrimonio BuscarPorNome(string nomeStatus);
-
-        void Adicionar(StatusPatrimonio statusPatrimonio);
-        void Atualizar(StatusPatrimonio statusPatrimonio);
+       public List<StatusPatrimonio> Listar();
+       public StatusPatrimonio BuscarPorId(Guid statusPatrimonioId);
+       public StatusPatrimonio BuscarPorNome(string nomeStatus);
+       public void Adicionar(StatusPatrimonio statusPatrimonio);
+       public void Atualizar(StatusPatrimonio statusPatrimonio);
 
     }
 }

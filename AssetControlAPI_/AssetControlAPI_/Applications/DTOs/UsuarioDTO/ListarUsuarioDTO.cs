@@ -2,6 +2,7 @@
 {
     public class ListarUsuarioDTO
     {
+        public Guid UsuarioId { get; set; } = Guid.Empty;
 
         public string Nome { get; set; } = string.Empty;
 

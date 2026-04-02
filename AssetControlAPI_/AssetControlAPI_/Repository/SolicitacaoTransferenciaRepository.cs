@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssetControlAPI_.Repository
 {
-    public interface SolicitacaoTransferenciaRepository
+    public class SolicitacaoTransferenciaRepository
     {
     }
 }

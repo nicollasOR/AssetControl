@@ -1,6 +1,8 @@
 ﻿
+using AssetControlAPI_.Applications.DTOs.TipoUsuarioDTO;
 using AssetControlAPI_.Applications.Services;
 using Microsoft.AspNetCore.Http;
+using AssetControlAPI_.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssetControlAPI_.Controllers
@@ -14,9 +16,9 @@ namespace AssetControlAPI_.Controllers
 
 
         [HttpGet]
-        public ActionResult <List<ListarTipoUsuario>> Listar()
+        public ActionResult <List<ListarTipoUsuarioDTO>> Listar()
         {
-            List<ListarTipoUsuario> listar = _service.Listar();
+            List<ListarTipoUsuarioDTO> listar = _service.Listar();
             if(listar == null)
                 return NotFound(listar);
 
@@ -24,11 +26,11 @@ namespace AssetControlAPI_.Controllers
         }
 
         [HttpGet("id/{guid}")]
-        public ActionResult <ListarTipoUsuario> BuscarPorId(Guid guid)
+        public ActionResult <ListarTipoUsuarioDTO> BuscarPorId(Guid guid)
         {
             try
             {
-                ListarTipoUsuario listar = _service.ObterPorGuid(guid);
+                ListarTipoUsuarioDTO listar = _service.ObterPorId(guid);
                 return Ok(listar);
             }
 
@@ -40,11 +42,11 @@ namespace AssetControlAPI_.Controllers
         }
 
         [HttpGet("nome/{nome}")]
-        public ActionResult <ListarTipoUsuario> BuscarPorNome(string nome)
+        public ActionResult <ListarTipoUsuarioDTO> BuscarPorNome(string nome)
         {
             try
             {
-                ListarTipoUsuario listar = _service.ObterPorNome(nome);
+                ListarTipoUsuarioDTO listar = _service.ObterPorNome(nome);
                 return Ok(listar);
             }
 
@@ -74,11 +76,11 @@ namespace AssetControlAPI_.Controllers
 
 
         [HttpPut]
-        public ActionResult <ListarTipoUsuario> Adicionar(Guid id, ListarTipoUsuario listarDTO)
+        public ActionResult <ListarTipoUsuarioDTO> Atualizar(Guid id, CriarTipoUsuarioDTO listarDTO)
         {
             try
             {
-                _service.Adicionar(id, listarDTO);
+                _service.Atualizar(id, listarDTO);
                 return NoContent();
             }
 

@@ -16,6 +16,10 @@ namespace AssetControlAPI_.Controllers
         public ActionResult<List<ListarCidadeDTO>> Listar()
         {
             List<ListarCidadeDTO> cidades = _service.Listar();
+            
+            if (cidades == null)
+                return NotFound(cidades);
+
             return Ok(cidades);
         }
 

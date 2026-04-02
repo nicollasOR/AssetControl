@@ -2,7 +2,7 @@
 {
     public class CriarUsuarioDTO
     {
-
+        public Guid usuarioId { get; set; } = Guid.Empty;
         public string Nome { get; set; } = null!;
 
         public string? RG { get; set; }
@@ -16,6 +16,7 @@
         public byte[] Senha { get; set; } = null!;
         public string NIF { get; set; } = string.Empty;
 
+        public bool? Ativo { get; set; }
 
 
         public Guid EnderecoId { get; set; }

@@ -12,6 +12,15 @@ namespace AssetControlAPI_.Applications.Services
         private readonly ICidadeRepository _repository;
         public CidadeService(ICidadeRepository repository) => _repository = repository;
 
+        private static ListarCidadeDTO listarDTO(Cidade cidade)
+        {
+            return new ListarCidadeDTO
+            {
+                cidadeId = cidade.CidadeId,
+                cidadeNome = cidade.NomeCidade,
+                estadoNome = cidade.Estado
+            };
+        }
 
         public List<ListarCidadeDTO> Listar()
         {

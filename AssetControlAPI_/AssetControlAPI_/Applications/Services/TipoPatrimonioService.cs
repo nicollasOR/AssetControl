@@ -13,17 +13,21 @@ namespace AssetControlAPI_.Applications.Services
         private readonly ITipoPatrimonioRepository _repository;
         public TipoPatrimonioService(ITipoPatrimonioRepository repository) => _repository = repository;
 
+        private static ListarTipoPatrimonioDTO lerDTO(TipoPatrimonio tipoPatrimonio)
+        {
+            return new ListarTipoPatrimonioDTO
+            {
+                tipoPatrimonioID = tipoPatrimonio.TipoPatrimonioId,
+                nomeTipoPatrimonio = tipoPatrimonio.NomeTipo
+            };
+        }
         public List<ListarTipoPatrimonioDTO> Listar()
         {
             List<TipoPatrimonio> tipoPatrimonio = _repository.Listar();
             if (tipoPatrimonio == null)
                 throw new DomainException("não existe este tipo");
 
-           List<ListarTipoPatrimonioDTO> tipoDTO = tipoPatrimonio.Select(tipoDTOs => new ListarTipoPatrimonioDTO
-            {
-                tipoPatrimonioID = tipoDTOs.TipoPatrimonioId,
-                nomeTipoPatrimonio = tipoDTOs.NomeTipo
-            }).ToList();
+            List<ListarTipoPatrimonioDTO> tipoDTO = tipoPatrimonio.Select(tipoDTOs => lerDTO(tipoDTOs)).ToList();
 
             return tipoDTO;
         }
@@ -34,12 +38,7 @@ namespace AssetControlAPI_.Applications.Services
             if (tipoPatrimonio == null)
                 throw new DomainException("TipoPatrimônio não existente");
 
-            ListarTipoPatrimonioDTO tipoPatrimonioDTO = new ListarTipoPatrimonioDTO
-            {
-                tipoPatrimonioID = tipoPatrimonio.TipoPatrimonioId,
-                nomeTipoPatrimonio = tipoPatrimonio.NomeTipo
-            };
-
+            ListarTipoPatrimonioDTO tipoPatrimonioDTO = lerDTO(tipoPatrimonio);
             return tipoPatrimonioDTO;
         }
 
@@ -49,13 +48,8 @@ namespace AssetControlAPI_.Applications.Services
             if(tipoPatrimonio == null)
                 throw new DomainException("TipoPatrimônio com nome errado não");
 
-            ListarTipoPatrimonioDTO tipoPatrimonoDTO = new ListarTipoPatrimonioDTO
-            {
-                tipoPatrimonioID = tipoPatrimonio.TipoPatrimonioId,
-                nomeTipoPatrimonio = tipoPatrimonio.NomeTipo
-            };
-
-            return tipoPatrimonoDTO;
+            ListarTipoPatrimonioDTO tipoPatrimonioDTO = lerDTO(tipoPatrimonio);
+            return tipoPatrimonioDTO;
         }
 
         public void Adicionar(CriarTipoPatrimonioDTO criarDTO)

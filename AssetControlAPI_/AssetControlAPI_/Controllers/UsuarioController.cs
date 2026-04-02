@@ -1,6 +1,7 @@
 ﻿using AssetControlAPI_.Applications.DTOs.UsuarioDTO;
 using AssetControlAPI_.Applications.Services;
 using AssetControlAPI_.Contexts;
+using AssetControlAPI_.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace AssetControlAPI_.Controllers
         {
             List<ListarUsuarioDTO> usuarios = _service.Listar();
             if (usuarios == null)
-                return BadRequest(usuarios);
+                return NotFound(usuarios);
 
             return Ok(usuarios);
         }
@@ -29,13 +30,13 @@ namespace AssetControlAPI_.Controllers
 
             try
             {
-            ListarUsuarioDTO listar = _service.BuscarPorId(id);
-            return Ok(listar);
+                ListarUsuarioDTO listar = _service.BuscarPorId(id);
+                return Ok(listar);
             }
 
-            catch(DomainException ex)
+            catch (DomainException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -44,13 +45,13 @@ namespace AssetControlAPI_.Controllers
         {
             try
             {
-            ListarUsuarioDTO listar = _service.BuscarPorNome(nome);
-            return Ok(listar);
+                ListarUsuarioDTO listar = _service.BuscarPorNome(nome);
+                return Ok(listar);
             }
 
-            catch(DomainException ex)
+            catch (DomainException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -59,15 +60,16 @@ namespace AssetControlAPI_.Controllers
         {
             try
             {
-            ListarUsuarioDTO listar = _service.BuscarPorNIF(NIF);
-            return Ok(listar);
+                ListarUsuarioDTO listar = _service.BuscarPorNIF(NIF);
+                return Ok(listar);
             }
 
-            catch(DomainException ex)
+            catch (DomainException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
+
 
         [HttpPost]
         public ActionResult<CriarUsuarioDTO> Adicionar(CriarUsuarioDTO criarDTO)
@@ -85,7 +87,7 @@ namespace AssetControlAPI_.Controllers
         }
 
         [HttpPut]
-        public ActionResult<ListarUsuarioDTO> Atualizar(Guid id, ListarUsuarioDTO lerDTO)
+        public ActionResult<ListarUsuarioDTO> Atualizar(Guid id, CriarUsuarioDTO lerDTO)
         {
             try
             {

@@ -13,6 +13,15 @@ namespace AssetControlAPI_.Applications.Services
         private readonly ITipoUsuarioRepository _repository;
         public TipoUsuarioService(ITipoUsuarioRepository repository) => _repository = repository;
 
+        private static ListarTipoUsuarioDTO lerDTO(TipoUsuario tipoUsuario)
+        {
+            return new ListarTipoUsuarioDTO
+            {
+                TipoUsuarioId = tipoUsuario.TipoUsuarioId,
+                nomeTipoUsuario = tipoUsuario.Nome
+            };
+            
+        }
         public List<ListarTipoUsuarioDTO> Listar()
         {
             List<TipoUsuario> tipoUsuario = _repository.Listar();
@@ -20,11 +29,7 @@ namespace AssetControlAPI_.Applications.Services
             if (tipoUsuario == null)
                 throw new DomainException("Tipo não encontrado");
 
-            List<ListarTipoUsuarioDTO> tipoUsuarioBanco = tipoUsuario.Select(construtorAux => new ListarTipoUsuarioDTO
-            {
-                TipoUsuarioId = construtorAux.TipoUsuarioId,
-                nomeTipoUsuario = construtorAux.Nome
-            }).ToList();
+            List<ListarTipoUsuarioDTO> tipoUsuarioBanco = tipoUsuario.Select(construtorAux => lerDTO(construtorAux)).ToList();
 
             return tipoUsuarioBanco;
         }
@@ -33,12 +38,7 @@ namespace AssetControlAPI_.Applications.Services
         {
             TipoUsuario usuario = _repository.ObterPorId(id);
 
-            ListarTipoUsuarioDTO listarUsuario = new ListarTipoUsuarioDTO
-            {
-                nomeTipoUsuario = usuario.Nome,
-                TipoUsuarioId = usuario.TipoUsuarioId
-            };
-
+            ListarTipoUsuarioDTO listarUsuario = lerDTO(usuario);
             return listarUsuario;
         }
 
@@ -47,11 +47,7 @@ namespace AssetControlAPI_.Applications.Services
             TipoUsuario usuario = _repository.ObterPorNome(nome);
             if (usuario == null)
                 throw new DomainException("Tipo não existe");
-            ListarTipoUsuarioDTO listarUsuario = new ListarTipoUsuarioDTO
-            {
-                nomeTipoUsuario = usuario.Nome,
-                TipoUsuarioId = usuario.TipoUsuarioId
-            };
+            ListarTipoUsuarioDTO listarUsuario = lerDTO(usuario);
             return listarUsuario;
         }
 

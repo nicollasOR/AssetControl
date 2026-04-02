@@ -21,6 +21,12 @@ namespace AssetControlAPI_.Applications.Regras
             }
         }
 
+        public static void ValidarPatrimonio(string patrimonio)
+        {
+            if (string.IsNullOrWhiteSpace(patrimonio))
+                throw new DomainException("Nome do patrimônio");
+        }
+
         //public static void Adicionar
 
     }

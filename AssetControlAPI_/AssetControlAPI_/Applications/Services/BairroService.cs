@@ -12,7 +12,15 @@ namespace AssetControlAPI_.Applications.Services
 
         private readonly IBairroRepository _repository;
         public BairroService(IBairroRepository repository) => _repository = repository; 
-
+        private static ListarBairroDTO listarDTO(Bairro bairro)
+        {
+            return new ListarBairroDTO
+            {
+                bairroId = bairro.BairroId,
+                bairroNome = bairro.NomeBairro,
+                cidadeId = bairro.CidadeId
+            };
+        }
 
         public List<ListarBairroDTO> Listar()
         {
@@ -22,14 +30,10 @@ namespace AssetControlAPI_.Applications.Services
             if (Bairro == null)
                 throw new DomainException("Bairro não existe");
 
-            List<ListarBairroDTO> listarDTO = Bairro.Select(bairroAux => new ListarBairroDTO
-            {
-                cidadeId =bairroAux.CidadeId,
-                bairroId = bairroAux.BairroId,
-                bairroNome = bairroAux.NomeBairro
-            }).ToList();
+            List<ListarBairroDTO> listarDTOs = Bairro.Select(bairroAux => listarDTO(bairroAux)).ToList(); 
+            
 
-            return listarDTO;
+            return listarDTOs;
         }
 
         public ListarBairroDTO ObterPorGuid(Guid id)
@@ -37,15 +41,10 @@ namespace AssetControlAPI_.Applications.Services
             Bairro? bairro = _repository.ObterPorGuid(id);
             if (bairro == null)
                 throw new DomainException("Bairro não existe");
+            ListarBairroDTO listarDTOs = listarDTO(bairro);
 
-            ListarBairroDTO listarDTO = new ListarBairroDTO
-            {
-                cidadeId = bairro.CidadeId,
-                bairroId = bairro.BairroId,
-                bairroNome = bairro.NomeBairro
-            };
 
-            return listarDTO;
+            return listarDTOs;
         }
 
         public ListarBairroDTO ObterPorNomeEstado(string nomeBairro, Guid cidadeId)
@@ -55,14 +54,10 @@ namespace AssetControlAPI_.Applications.Services
             if (bairro == null)
                 throw new DomainException("Nome errado");
 
-            ListarBairroDTO listarDTO = new ListarBairroDTO
-            {
-                cidadeId = bairro.CidadeId,
-                bairroId = bairro.BairroId,
-                bairroNome = bairro.NomeBairro
-            };
+            ListarBairroDTO listarDTOs = listarDTO(bairro);
 
-            return listarDTO;
+
+            return listarDTOs;
 
         }
 
