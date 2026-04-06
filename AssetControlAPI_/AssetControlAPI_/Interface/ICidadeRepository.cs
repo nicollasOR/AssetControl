@@ -7,7 +7,7 @@ namespace AssetControlAPI_.Interface
 
         public List<Cidade> Listar();
         public Cidade ObterPorId(Guid cidadeId);
-        public Cidade ObterPorNomeEstado(string nomeCidade, string nomeEstado);
+        public Cidade ObterPorNome(string nomeCidade);
         public void Adicionar(Cidade cidade);
         public void Atualizar(Cidade cidade);
 

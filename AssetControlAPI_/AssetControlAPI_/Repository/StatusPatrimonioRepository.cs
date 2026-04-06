@@ -12,17 +12,17 @@ namespace AssetControlAPI_.Repository
 
         public List<StatusPatrimonio> Listar()
         {
-            return _context.StatusPatrimonio.OrderBy(varAux => varAux.StatusPatrimonio1).ToList();  
+            return _context.StatusPatrimonio.OrderBy(varAux => varAux.StatusPatrimonio1).ToList();
         }
 
-        public StatusPatrimonio BuscarPorid(Guid id)
+        public StatusPatrimonio BuscarPorId(Guid statusPatrimonioId)
         {
-            return _context.StatusPatrimonio.Find(id);
+            return _context.StatusPatrimonio.Find(statusPatrimonioId);
         }
 
-        public StatusPatrimonio BuscarPorNome(string nome)
+        public StatusPatrimonio BuscarPorNome(string nomeStatus)
         {
-            return _context.StatusPatrimonio.Find(nome);
+            return _context.StatusPatrimonio.Find(nomeStatus);
         }
 
         public void Adicionar(StatusPatrimonio statusPatrimonio)

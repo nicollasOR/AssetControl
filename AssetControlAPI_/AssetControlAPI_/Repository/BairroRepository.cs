@@ -48,7 +48,6 @@ namespace AssetControlAPI_.Repository
                 return;
 
             bairroAux.NomeBairro = bairro.NomeBairro;
-            bairroAux.CidadeId = bairro.CidadeId;
 
             _context.SaveChanges();
         }

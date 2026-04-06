@@ -31,7 +31,7 @@ namespace AssetControlAPI_.Repository
         }
 
 
-        public Endereco BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId = null)
+        public Endereco BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId)
         {
             var consulta = _context.Endereco.AsQueryable();
             if (enderecoId.HasValue)
@@ -39,8 +39,8 @@ namespace AssetControlAPI_.Repository
 
             return consulta.FirstOrDefault(
                 endereco =>
-                endereco.Logradoura.ToLower() == logradouro.ToLower() &&
-                endereco.Numero == numero &&
+                endereco.Logradoura.ToLower() == logradouro.ToLower() ||
+                endereco.Numero == numero ||
                 endereco.BairroId == bairroId
                 );
 

@@ -23,9 +23,9 @@ namespace AssetControlAPI_.Interface
             return busca;
         }
 
-        public Cidade ObterPorNomeEstado(string nomeCidade, string nomeEstado)
+        public Cidade ObterPorNome(string nomeCidade)
         {
-            var busca = _context.Cidade.FirstOrDefault(varAux => varAux.NomeCidade == nomeCidade && varAux.Estado == nomeEstado);
+            var busca = _context.Cidade.FirstOrDefault(varAux => varAux.NomeCidade == nomeCidade );
             return busca;
         }
 
@@ -42,7 +42,6 @@ namespace AssetControlAPI_.Interface
             Cidade cidadeBanco = _context.Cidade.Find(cidade.CidadeId);
 
             cidadeBanco.NomeCidade = cidade.NomeCidade;
-            cidadeBanco.Estado = cidade.Estado;
 
 
             _context.SaveChanges();

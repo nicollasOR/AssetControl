@@ -17,8 +17,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-builder.Services.AddScoped<EnderecoService>();
+//builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+//builder.Services.AddScoped<EnderecoService>();
 
 builder.Services.AddScoped<IBairroRepository, BairroRepository>();
 builder.Services.AddScoped<BairroService>();

@@ -7,6 +7,7 @@ using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography;
 using System.Text;
 using AssetControlAPI_.Applications.Regras;
+using AssetControlAPI_.Applications.Autenticacao;
 
 namespace AssetControlAPI_.Applications.Services
 {
@@ -95,17 +96,37 @@ namespace AssetControlAPI_.Applications.Services
         public void Adicionar(CriarUsuarioDTO criarDTO)
         {
             ValidarCriacaoDTO.ValidarNome(criarDTO.Nome);
-            //Usuario? usuario = _repository.BuscarPorId(criarDTO.UsuarioId);
-            //Usuario? usuarioNIF = _repository.BuscarPorNIF(criarDTO.NIF);
-            //Usuario? usuarioNome = _repository.BuscarPorNome(criarDTO.Nome);
-            Usuario? usuario = _repository.BuscarPor_ID_NIF_Nome(criarDTO.usuarioId, criarDTO.NIF, criarDTO.Nome);
-            if (usuario != null)
-                throw new DomainException("Usuário já existente!");
+            ValidarCriacaoDTO.ValidarNIF(criarDTO.NIF); 
+            ValidarCriacaoDTO.ValidarCPF(criarDTO.CPF);
+            ValidarCriacaoDTO.ValidarEmail(criarDTO.Email);
+
+
+            Usuario? usuarioDuplicado = _repository.BuscarPor_ID_NIF_Nome(criarDTO.usuarioId, criarDTO.NIF, criarDTO.Nome);
+            if (usuarioDuplicado != null)
+            {
+                if(usuarioDuplicado.NIF == criarDTO.NIF)
+                throw new DomainException("Usuário já cadastrado com este NIF");
+
+                if(usuarioDuplicado.CPF == criarDTO.CPF)
+                throw new DomainException("Usuário já cadastrado com este CPF!");
+
+                if (usuarioDuplicado.Email.ToLower() == criarDTO.Email.ToLower())
+                    throw new DomainException("Usuário já cadastrado com este Email");
+            }
+
+            if (!_repository.enderecoExiste(criarDTO.EnderecoId))
+                throw new DomainException("Endereço informado não existe");
+
+            if (!_repository.tipoUsuarioExiste(criarDTO.TipoUsuarioId))
+                throw new DomainException("O tipo de usuário não existe");
+
+            if (!_repository.cargoExiste(criarDTO.CargoId))
+                throw new DomainException("O cargo informado não existe!");
 
             Usuario usuarioDTO =  new Usuario
             {
                 Nome = criarDTO.Nome,
-                Senha = criarDTO.Senha, // HashSenha(criarDTO.Senha) -> descobrir porque está dando erro)
+                Senha = CriptografarUsuario.CriptografarSenha(criarDTO.NIF), 
                 CPF = criarDTO.CPF,
                 CargoId = criarDTO.CargoId,
                 Email = criarDTO.Email,
@@ -113,9 +134,9 @@ namespace AssetControlAPI_.Applications.Services
                 NIF = criarDTO.NIF,
                 RG = criarDTO.RG,
                 EnderecoId = criarDTO.EnderecoId,
-                PrimeiroAcesso = criarDTO.PrimeiroAcesso,
-                Ativo = criarDTO.Ativo,
-                TipoUsuarioId = criarDTO.TipoUsuarioId
+                TipoUsuarioId = criarDTO.TipoUsuarioId,
+                PrimeiroAcesso = true,
+                Ativo = true
             };
 
             _repository.Adicionar(usuarioDTO);
@@ -123,28 +144,64 @@ namespace AssetControlAPI_.Applications.Services
 
         public void Atualizar(Guid guid, CriarUsuarioDTO criarDTO)
         {
-            ValidarCriacaoDTO.ValidarNome(criarDTO.Nome);
-            //Usuario? usuarioID = _repository.BuscarPorId(id);
-            //Usuario? usuarioNIF = _repository.BuscarPorNIF(criarDTO.NIF);
-            //Usuario? usuarioNome = _repository.BuscarPorNome(criarDTO.Nome);
-            Usuario? usuarioID = _repository.BuscarPor_ID_NIF_Nome(criarDTO.usuarioId, criarDTO.NIF, criarDTO.Nome);
 
-            if (usuarioID == null)
+            ValidarCriacaoDTO.ValidarNome(criarDTO.Nome);
+            ValidarCriacaoDTO.ValidarNIF(criarDTO.NIF);
+            ValidarCriacaoDTO.ValidarCPF(criarDTO.CPF);
+            ValidarCriacaoDTO.ValidarEmail(criarDTO.Email);
+            Usuario? usuarioBanco = _repository.BuscarPorId(guid);
+            if (usuarioBanco == null)
                 throw new DomainException("Usuário não existente");
 
-            usuarioID.Nome = criarDTO.Nome; 
-            usuarioID.CPF = criarDTO.CPF;
-            usuarioID.CargoId = criarDTO.CargoId;
-            usuarioID.Email = criarDTO.Email;
-            usuarioID.CarteiraTrabalho = criarDTO.CarteiraTrabalho;
-            usuarioID.NIF = criarDTO.NIF;
-            usuarioID.RG = criarDTO.RG;
-            usuarioID.EnderecoId = criarDTO.EnderecoId;
-            usuarioID.PrimeiroAcesso = criarDTO.PrimeiroAcesso;
-            usuarioID.Ativo = criarDTO.Ativo;
-            usuarioID.TipoUsuarioId = criarDTO.TipoUsuarioId;
+            Usuario? usuarioDuplicado = _repository.BuscarPor_ID_NIF_Nome(criarDTO.usuarioId, criarDTO.NIF, criarDTO.Nome);
 
-            _repository.Atualizar(usuarioID);
+            if(usuarioDuplicado != null)
+            {
+                if (usuarioDuplicado.NIF == criarDTO.NIF)
+                    throw new DomainException("Usuário já cadastrado com este NIF");
+
+                if (usuarioDuplicado.CPF == criarDTO.CPF)
+                    throw new DomainException("Usuário já cadastrado com este CPF!");
+
+                if (usuarioDuplicado.Email.ToLower() == criarDTO.Email.ToLower())
+                    throw new DomainException("Usuário já cadastrado com este Email");
+            }
+
+            if (!_repository.enderecoExiste(criarDTO.EnderecoId))
+                throw new DomainException("Endereço informado não existe");
+
+            if (!_repository.tipoUsuarioExiste(criarDTO.TipoUsuarioId))
+                throw new DomainException("O tipo de usuário não existe");
+
+            if (!_repository.cargoExiste(criarDTO.CargoId))
+                throw new DomainException("O cargo informado não existe!");
+
+
+            usuarioDuplicado.Nome = criarDTO.Nome; 
+            usuarioDuplicado.CPF = criarDTO.CPF;
+            usuarioDuplicado.CargoId = criarDTO.CargoId;
+            usuarioDuplicado.Email = criarDTO.Email;
+            usuarioDuplicado.CarteiraTrabalho = criarDTO.CarteiraTrabalho;
+            usuarioDuplicado.NIF = criarDTO.NIF;
+            usuarioDuplicado.RG = criarDTO.RG;
+            usuarioDuplicado.EnderecoId = criarDTO.EnderecoId;
+            usuarioDuplicado.TipoUsuarioId = criarDTO.TipoUsuarioId;
+            usuarioDuplicado.CargoId = criarDTO.CargoId;
+
+            //usuarioID.PrimeiroAcesso = false;
+            //usuarioID.Ativo = criarDTO.Ativo;
+
+            _repository.Atualizar(usuarioDuplicado);
+        }
+
+        public void AtualizarStatus(Guid id, AtualizarStatusUsuarioDTO dto)
+        {
+            Usuario usuarioBanco = _repository.BuscarPorId(id);
+            if (usuarioBanco == null)
+                throw new DomainException("Usuário nao encontrado");
+
+            usuarioBanco.Ativo = dto.Ativo;
+            _repository.AtualizarStatus(usuarioBanco);
         }
 
     }

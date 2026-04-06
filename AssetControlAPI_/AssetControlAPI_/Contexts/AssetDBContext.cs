@@ -47,6 +47,7 @@ public partial class AssetDBContext : DbContext
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AssetDB;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -89,9 +90,6 @@ public partial class AssetDBContext : DbContext
             entity.HasKey(e => e.CidadeId).HasName("PK__Cidade__B680093936A225DF");
 
             entity.Property(e => e.CidadeId).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.Estado)
-                .HasMaxLength(2)
-                .IsUnicode(false);
             entity.Property(e => e.NomeCidade)
                 .HasMaxLength(50)
                 .IsUnicode(false);

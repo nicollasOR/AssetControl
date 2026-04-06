@@ -101,5 +101,21 @@ namespace AssetControlAPI_.Controllers
             }
         }
 
+        [HttpPatch("statusUsuario/{id}")]
+        public ActionResult<AtualizarStatusUsuarioDTO> AtualizarStatus(Guid id, AtualizarStatusUsuarioDTO dto)
+        {
+            try
+            {
+                _service.AtualizarStatus(id, dto);
+                return NoContent();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        }
     }
-}

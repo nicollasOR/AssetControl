@@ -27,7 +27,30 @@ namespace AssetControlAPI_.Applications.Regras
                 throw new DomainException("Nome do patrimônio");
         }
 
-        //public static void Adicionar
+        public static void ValidarLogradoura(string logradouro)
+        {
+            if (string.IsNullOrWhiteSpace(logradouro))
+                throw new DomainException("Nome do Logradouro");
+        }
+
+        public static void ValidarNIF(string NIF)
+        {
+            if (string.IsNullOrWhiteSpace(NIF))
+                throw new DomainException("NIF Obrigatório");
+        }
+
+
+        public static void ValidarCPF(string CPF)
+        {
+            if (string.IsNullOrWhiteSpace(CPF))
+                throw new DomainException("CPF Obrigatório");
+        }
+
+        public static void ValidarEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                throw new DomainException("Email Obrigatório");
+        }
 
     }
 }

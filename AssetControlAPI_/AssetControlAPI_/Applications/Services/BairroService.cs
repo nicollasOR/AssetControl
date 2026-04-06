@@ -83,7 +83,7 @@ namespace AssetControlAPI_.Applications.Services
         public void Atualizar(Guid guid, CriarBairroDTO criarDTO)
         {
             ValidarCriacaoDTO.ValidarNome(criarDTO.nomeBairro);
-            Bairro? bairroBanco = _repository.ObterPorNomeEstado(criarDTO.nomeBairro, criarDTO.cidadeId);
+            Bairro? bairroBanco = _repository.ObterPorGuid(guid);
 
             if (bairroBanco == null)
                 throw new DomainException("Bairro não existe");

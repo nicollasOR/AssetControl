@@ -21,7 +21,7 @@ namespace AssetControlAPI_.Applications.Services
                 CEP = endereco.CEP,
                 bairroId = endereco.BairroId
             };
-            
+
         }
         public List<LerEnderecoDTO> Listar()
         {
@@ -83,9 +83,9 @@ namespace AssetControlAPI_.Applications.Services
             };
 
             _repository.Adicionar(enderecoAux);
-            
+
             //if(endereco != null && endereco.Bairro != criarDTO.bairroId)
-        
+
         }
 
         public void Atualizar(Guid bairroId, CriarEnderecoDTO criarDTO)

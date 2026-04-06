@@ -18,7 +18,6 @@ namespace AssetControlAPI_.Applications.Services
             {
                 cidadeId = cidade.CidadeId,
                 cidadeNome = cidade.NomeCidade,
-                estadoNome = cidade.Estado
             };
         }
 
@@ -31,7 +30,6 @@ namespace AssetControlAPI_.Applications.Services
             {
                 cidadeId = cidade.CidadeId,
                 cidadeNome = cidade.NomeCidade,
-                estadoNome = cidade.Estado
             }).ToList();
 
             return cidadesDto;
@@ -48,7 +46,6 @@ namespace AssetControlAPI_.Applications.Services
             {
                 cidadeId = cidade.CidadeId,
                 cidadeNome = cidade.NomeCidade,
-                estadoNome = cidade.Estado
             };
 
             return listarDto;
@@ -57,16 +54,14 @@ namespace AssetControlAPI_.Applications.Services
         public void Adicionar(CriarCidadeDTO criarDTO)
         {
             ValidarCriacaoDTO.ValidarNome(criarDTO.NomeCidade);
-            ValidarCriacaoDTO.ValidarEstado(criarDTO.nomeEstado);
 
-            Cidade? cidadeBanco = _repository.ObterPorNomeEstado(criarDTO.NomeCidade, criarDTO.nomeEstado);
+            Cidade? cidadeBanco = _repository.ObterPorNome(criarDTO.NomeCidade);
             if (cidadeBanco != null)
                 throw new DomainException("Já existe esta cidade");
 
             Cidade cidade = new Cidade
             {
-                NomeCidade = criarDTO.NomeCidade,
-                Estado = criarDTO.nomeEstado
+                NomeCidade = criarDTO.NomeCidade
             };
 
             _repository.Adicionar(cidade);
@@ -75,9 +70,8 @@ namespace AssetControlAPI_.Applications.Services
         public void Atualizar( Guid cidadeId,CriarCidadeDTO listarDto)
         {
             ValidarCriacaoDTO.ValidarNome(listarDto.NomeCidade);
-            ValidarCriacaoDTO.ValidarEstado(listarDto.nomeEstado);
 
-            Cidade? cidadeBanco = _repository.ObterPorNomeEstado(listarDto.NomeCidade, listarDto.nomeEstado);
+            Cidade? cidadeBanco = _repository.ObterPorNome(listarDto.NomeCidade);
 
             if (cidadeBanco == null)
                 throw new DomainException("Cidade não existe");
@@ -87,7 +81,6 @@ namespace AssetControlAPI_.Applications.Services
                 throw new DomainException("Já existe uma cidade cadastrada com esse nome nesse estado.");
 
             cidadeBanco.NomeCidade = listarDto.NomeCidade;
-            cidadeBanco.Estado = listarDto.nomeEstado;
 
             _repository.Atualizar(cidadeBanco);
         }
