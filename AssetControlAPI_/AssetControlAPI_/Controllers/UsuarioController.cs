@@ -2,6 +2,7 @@
 using AssetControlAPI_.Applications.Services;
 using AssetControlAPI_.Contexts;
 using AssetControlAPI_.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,6 +15,7 @@ namespace AssetControlAPI_.Controllers
         private readonly UsuarioService _service;
         public UsuarioController(UsuarioService service) => _service = service;
 
+        [Authorize(Roles = "Coordenador")]
         [HttpGet]
         public ActionResult<List<ListarUsuarioDTO>> Listar()
         {
@@ -56,6 +58,7 @@ namespace AssetControlAPI_.Controllers
         }
 
         [HttpGet("NIF/{NIF}")]
+        [Authorize]
         public ActionResult<ListarUsuarioDTO> BuscarPorNIF(string NIF)
         {
             try
@@ -71,6 +74,7 @@ namespace AssetControlAPI_.Controllers
         }
 
 
+        [Authorize]
         [HttpPost]
         public ActionResult<CriarUsuarioDTO> Adicionar(CriarUsuarioDTO criarDTO)
         {
@@ -86,6 +90,8 @@ namespace AssetControlAPI_.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Coordenador")]
         [HttpPut]
         public ActionResult<ListarUsuarioDTO> Atualizar(Guid id, CriarUsuarioDTO lerDTO)
         {
@@ -101,6 +107,7 @@ namespace AssetControlAPI_.Controllers
             }
         }
 
+        [Authorize(Roles = "Coordenador")]
         [HttpPatch("statusUsuario/{id}")]
         public ActionResult<AtualizarStatusUsuarioDTO> AtualizarStatus(Guid id, AtualizarStatusUsuarioDTO dto)
         {
@@ -116,6 +123,8 @@ namespace AssetControlAPI_.Controllers
             }
 
         }
+
+
 
         }
     }

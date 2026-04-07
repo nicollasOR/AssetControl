@@ -25,13 +25,21 @@ namespace AssetControlAPI_.Repository
         {
             return _context.Endereco.Any(aux => aux.BairroId == bairroId);
         }
-        public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
-        {
-            return _context.Endereco.FirstOrDefault(varAux => varAux.Logradoura.ToLower() == logradoura.ToLower() && varAux.Numero == numero && varAux.BairroId == bairroId);
-        }
+        //public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
+        //{
+        //    var consulta = _context.Endereco.AsQueryable();
+
+        //    return consulta.FirstOrDefault(
+        //        endereco =>
+        //        endereco.Logradoura.ToLower() == logradoura.ToLower() ||
+        //        endereco.Numero == numero ||
+        //        endereco.BairroId == bairroId
+        //        );
+
+        //}
 
 
-        public Endereco BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId)
+        public Endereco BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId = null)
         {
             var consulta = _context.Endereco.AsQueryable();
             if (enderecoId.HasValue)

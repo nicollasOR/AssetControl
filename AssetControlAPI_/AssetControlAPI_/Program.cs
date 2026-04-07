@@ -17,8 +17,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-//builder.Services.AddScoped<EnderecoService>();
+builder.Services.AddScoped<IEnderecoRepository, EnderecoRepository>();
+builder.Services.AddScoped<EnderecoService>();
+
+builder.Services.AddScoped<ILogPatrimonioRepository, LogPatrimonioRepository>();
+builder.Services.AddScoped<LogPatrimonioService>();
+
+//builder.Services.AddScoped<IUsuarioRepository, uUsuarioRepository>();
+//builder.Services.AddScoped<AutenticacaoService>();
 
 builder.Services.AddScoped<IBairroRepository, BairroRepository>();
 builder.Services.AddScoped<BairroService>();

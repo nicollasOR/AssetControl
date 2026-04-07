@@ -42,15 +42,15 @@ namespace AssetControlAPI_.Applications.Services
             return listarDTO;
         }
 
-        public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
-        {
-            Endereco? endereco = _repository.BuscarPorLogradouro(logradoura, numero, bairroId);
-            if (endereco == null)
-                throw new DomainException("Endereço não encontrado");
+        //public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
+        //{
+        //    Endereco? endereco = _repository.BuscarPorLogradouro(logradoura, numero, bairroId);
+        //    if (endereco == null)
+        //        throw new DomainException("Endereço não encontrado");
 
-            LerEnderecoDTO lerDTOs = lerDTO(endereco);
-            return lerDTOs;
-        }
+        //    LerEnderecoDTO lerDTOs = lerDTO(endereco);
+        //    return lerDTOs;
+        //}
 
 
         public LerEnderecoDTO BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId)
@@ -67,10 +67,14 @@ namespace AssetControlAPI_.Applications.Services
         public void Adicionar(CriarEnderecoDTO criarDTO)
         {
             ValidarCriacaoDTO.ValidarNome(criarDTO.Logradoura);
-            Endereco? enderecoBanco = _repository.BuscarPorLogradouroENumero(criarDTO.Logradoura, criarDTO.numero, criarDTO.bairroId);
+            if (!_repository.BairroExiste(criarDTO.bairroId))
+                throw new DomainException("Bairro informado não existe");
 
-            if (enderecoBanco != null)
-                throw new DomainException("Endereço já existe");
+            Endereco enderecoExiste = _repository.BuscarPorLogradouroENumero(criarDTO.Logradoura, criarDTO.numero, criarDTO.bairroId);
+
+
+            if (enderecoExiste != null)
+                throw new DomainException("Endereço já existente");
 
             Endereco enderecoAux = new Endereco
             {
@@ -84,7 +88,6 @@ namespace AssetControlAPI_.Applications.Services
 
             _repository.Adicionar(enderecoAux);
 
-            //if(endereco != null && endereco.Bairro != criarDTO.bairroId)
 
         }
 
@@ -93,6 +96,10 @@ namespace AssetControlAPI_.Applications.Services
             ValidarCriacaoDTO.ValidarNome(criarDTO.Logradoura);
 
             Endereco enderecoBanco = _repository.BuscarPorLogradouroENumero(criarDTO.Logradoura, criarDTO.numero, criarDTO.bairroId);
+            
+            if (!_repository.BairroExiste(criarDTO.bairroId))
+                throw new DomainException("Bairro informado não existe");
+
             Endereco enderecoBairroGuid = _repository.BuscarPorId(bairroId);
             if (enderecoBairroGuid == null)
                 throw new DomainException("Não existe este bairro");
@@ -106,6 +113,8 @@ namespace AssetControlAPI_.Applications.Services
             enderecoBairroGuid.Complemento = criarDTO.Complemento;
 
             _repository.Atualizar(enderecoBairroGuid);
+
+
 
         }
 
