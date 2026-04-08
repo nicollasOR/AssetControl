@@ -98,12 +98,6 @@ StatusPatrimonio		VARCHAR(50) NOT NULL,
 )
 GO
 
-CREATE TABLE TipoPatrimonio
-(
-TipoPatrimonioId		UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-NomeTipo                VARCHAR(50) NOT NULL
-)
-
 GO
 
 CREATE TABLE Area
@@ -139,9 +133,6 @@ StatusPatrimonioId		UNIQUEIDENTIFIER NOT NULL,
 
 CONSTRAINT FK_PatrimonioLocalizacao_ID  FOREIGN KEY(LocalizacaoId)
 		REFERENCES Localizacao(LocalizacaoId),  
-
-CONSTRAINT FK_Patrimonio_TipoPatrimonio_ID  FOREIGN KEY(TipoPatrimonioId)
-		REFERENCES TipoPatrimonio(TipoPatrimonioId),  
 
 CONSTRAINT FK_Patrimonio_StatusPatrimonio_ID  FOREIGN KEY (StatusPatrimonioId)
 		REFERENCES StatusPatrimonio(StatusPatrimonioId)  
