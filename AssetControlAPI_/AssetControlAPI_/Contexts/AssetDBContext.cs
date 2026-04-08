@@ -40,8 +40,6 @@ public partial class AssetDBContext : DbContext
 
     public virtual DbSet<TipoAlteracao> TipoAlteracao { get; set; }
 
-    public virtual DbSet<TipoPatrimonio> TipoPatrimonio { get; set; }
-
     public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
 
     public virtual DbSet<Usuario> Usuario { get; set; }
@@ -211,11 +209,6 @@ public partial class AssetDBContext : DbContext
                 .HasForeignKey(d => d.StatusPatrimonioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Patrimonio_StatusPatrimonio_ID");
-
-            entity.HasOne(d => d.TipoPatrimonio).WithMany(p => p.Patrimonio)
-                .HasForeignKey(d => d.TipoPatrimonioId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Patrimonio_TipoPatrimonio_ID");
         });
 
         modelBuilder.Entity<SolicitacaoTransferencia>(entity =>
@@ -235,6 +228,10 @@ public partial class AssetDBContext : DbContext
                 .HasForeignKey(d => d.PatrimonioId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_SolicitacaoTransferencia_Patrimonio_ID");
+
+            entity.HasOne(d => d.StatusTransferencia).WithMany(p => p.SolicitacaoTransferencia)
+                .HasForeignKey(d => d.StatusTransferenciaId)
+                .HasConstraintName("FK_Solicitacao_StatusTransferencia");
 
             entity.HasOne(d => d.UsuarioAprovacao).WithMany(p => p.SolicitacaoTransferenciaUsuarioAprovacao)
                 .HasForeignKey(d => d.UsuarioAprovacaoId)
@@ -274,16 +271,6 @@ public partial class AssetDBContext : DbContext
 
             entity.Property(e => e.TipoAlteracaoId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.NomeAlteracao).HasMaxLength(50);
-        });
-
-        modelBuilder.Entity<TipoPatrimonio>(entity =>
-        {
-            entity.HasKey(e => e.TipoPatrimonioId).HasName("PK__TipoPatr__4DC9FFB9E94BE10C");
-
-            entity.Property(e => e.TipoPatrimonioId).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.NomeTipo)
-                .HasMaxLength(50)
-                .IsUnicode(false);
         });
 
         modelBuilder.Entity<TipoUsuario>(entity =>

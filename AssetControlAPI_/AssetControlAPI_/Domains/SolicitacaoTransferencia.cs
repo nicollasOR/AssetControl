@@ -21,9 +21,13 @@ public partial class SolicitacaoTransferencia
 
     public Guid LocalizacaoId { get; set; }
 
+    public Guid? StatusTransferenciaId { get; set; }
+
     public virtual Localizacao Localizacao { get; set; } = null!;
 
     public virtual Patrimonio Patrimonio { get; set; } = null!;
+
+    public virtual StatusTransferencia? StatusTransferencia { get; set; }
 
     public virtual Usuario? UsuarioAprovacao { get; set; }
 

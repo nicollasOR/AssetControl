@@ -8,4 +8,6 @@ public partial class StatusTransferencia
     public Guid StatusTransferenciaId { get; set; }
 
     public string StatusTransferencia1 { get; set; } = null!;
+
+    public virtual ICollection<SolicitacaoTransferencia> SolicitacaoTransferencia { get; set; } = new List<SolicitacaoTransferencia>();
 }
