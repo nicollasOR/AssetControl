@@ -12,13 +12,18 @@ namespace AssetControlAPI_.Interface
         public bool UsuarioResponsavelDaLocalizacao(Guid usuarioId, Guid localizacaoid);
 
         public StatusTransferencia BuscarStatusTransferenciaPorNome(string nome);
-        //public SolicitacaoTransferencia BuscarStatusTransferenciaPorNome(string nome);
-        
+
 
         public bool LocalizacaoExiste(Guid localizacaoId);
-
-        public Patrimonio BuscarPatrimonio(Guid patrimonioId);
         public void Adicionar(SolicitacaoTransferencia solicitacaoTransferencia);
         public void Atualizar(SolicitacaoTransferencia solicitacaoTransferencia);
+
+
+        public Patrimonio BuscarPatrimonioPorId(Guid patrimonioId);
+        public StatusPatrimonio BuscarStatusPatrimonioPorNome(string nomeStatus);
+        public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo);
+        public void AtualizarPatrimonio(Patrimonio patrimonio);
+        public void AdicionarLog(LogPatrimonio logPatrimonio);
+
     }
 }

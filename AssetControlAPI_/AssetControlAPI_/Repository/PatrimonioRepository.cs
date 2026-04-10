@@ -27,10 +27,24 @@ namespace AssetControlAPI_.Repository
             return banco;
         }
 
-        public Patrimonio BuscarPorNumeroPatrimonio(string numeroPatrimonio, Guid? patrimonioId = null)
+        public bool BuscarPorNumeroPatrimonio(string numeroPatrimonio)
         {
-            return _context.Patrimonio.FirstOrDefault(varAux => varAux.NumeroSerie == numeroPatrimonio && varAux.PatrimonioId == patrimonioId);
+            return _context.Patrimonio.Any
+                (varAux => varAux.NumeroSerie == numeroPatrimonio);
+        }
+        public Localizacao BuscarPorLocalizacaoNome(string nomeLocalizacao)
+        {
+            return _context.Localizacao.FirstOrDefault(varAux => varAux.NomeLocalizacao.ToLower() == nomeLocalizacao.ToLower());
+        }
 
+        public StatusPatrimonio BuscarStatusPatrimonioPorNome(string nomeStatus)
+        {
+            return _context.StatusPatrimonio.FirstOrDefault(varAux => varAux.StatusPatrimonio1.ToLower() == nomeStatus.ToLower());
+        }
+        
+        public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo)
+        {
+            return _context.TipoAlteracao.FirstOrDefault(varAux => varAux.NomeAlteracao.ToLower() == nomeTipo.ToLower());
         }
 
 
@@ -78,13 +92,20 @@ namespace AssetControlAPI_.Repository
             if (patrimonio == null)
                 return;
 
-            Patrimonio? patrimonioBanco = _context.Patrimonio.FirstOrDefault
-                (varAux => varAux.PatrimonioId == patrimonio.PatrimonioId && varAux.StatusPatrimonioId == patrimonio.StatusPatrimonioId);
-            if (patrimonioBanco == null)
-               return;
+            Patrimonio patrimonioBanco = _context.Patrimonio.Find(patrimonio.PatrimonioId);
 
-            patrimonioBanco.PatrimonioId = patrimonio.PatrimonioId;
+            if (patrimonioBanco == null)
+                return;
+
             patrimonioBanco.StatusPatrimonioId = patrimonio.StatusPatrimonioId;
+
+            _context.SaveChanges();
+        }
+
+        public void AdicionarLog(LogPatrimonio logPatrimonio)
+        {
+            _context.LogPatrimonio.Add(logPatrimonio);
+            _context.SaveChanges();
         }
 
     }

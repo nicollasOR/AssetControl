@@ -58,7 +58,22 @@ namespace AssetControlAPI_.Applications.Regras
                 throw new DomainException("Senha é obrigatória");
         }
 
+        public static void ValidarJustificativa(string justificativa)
+        {
+            if (string.IsNullOrWhiteSpace(justificativa))
+            {
+                throw new DomainException("Justificativa é obrigatória.");
+            }
+        }
+
+        public static void ValidarNumeroPatrimonio(string numeroPatrimonio)
+        {
+            if (string.IsNullOrWhiteSpace(numeroPatrimonio))
+                throw new DomainException("Número de patrimônio é obrigatório");
+        }
 
 
-    }
+
+
+        }
 }

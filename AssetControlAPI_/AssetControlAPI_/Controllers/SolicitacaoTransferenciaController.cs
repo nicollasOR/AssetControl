@@ -4,6 +4,7 @@ using AssetControlAPI_.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AssetControlAPI_.Controllers
 {
@@ -43,5 +44,48 @@ namespace AssetControlAPI_.Controllers
             }
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Adicionar(CriarSolicitacaoTransferenciaDTO dto)
+        {
+            try
+            {
+                string usuarioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(usuarioIdClaim))
+                    return Unauthorized(usuarioIdClaim);
+                Guid usuarioId = Guid.Parse(usuarioIdClaim);
+                _service.Adicionar(usuarioId, dto);
+
+                return Created();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [Authorize]
+        [HttpPatch("{id}/responder")]
+        public ActionResult Responder(Guid id, ResponderSolicitacaoTransferenciaDTO dto)
+        {
+            try
+            {
+                string usuarioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (string.IsNullOrEmpty(usuarioIdClaim))
+                    return Unauthorized("Usuário não autenticado");
+                Guid usuarioId = Guid.Parse(usuarioIdClaim);
+                _service.Responder(id, usuarioId, dto);
+
+                return Created();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
+
 }

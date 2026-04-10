@@ -54,17 +54,80 @@ namespace AssetControlAPI_.Repository
             return _context.Localizacao.Any(varAux => varAux.LocalizacaoId == localizacaoId);
         }
 
-        public Patrimonio BuscarPorPatrimonio(Guid patrimonioId)
+        public Patrimonio BuscarPatrimonioPorId(Guid patrimonioId)
         {
-            return _context.Patrimonio.Find(patrimonioId);
+            return _context.Patrimonio.Find(patrimonioId)!;
         }
 
         public void Atualizar(StatusTransferencia status)
         {
             if (status == null)
                 return;
+        }
 
 
+
+        public void Adicionar(SolicitacaoTransferencia solicitacaoTransferencia)
+        {
+            _context.SolicitacaoTransferencia.Add(solicitacaoTransferencia);
+            _context.SaveChanges();
+        }
+
+        public StatusPatrimonio BuscarStatusPatrimonioPorNome(string nomeStatus)
+        {
+            return _context.StatusPatrimonio.FirstOrDefault(status => status.StatusPatrimonio1.ToLower() == nomeStatus.ToLower())!;
+        }
+
+        public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo)
+        {
+            return _context.TipoAlteracao.FirstOrDefault(tipo => tipo.NomeAlteracao.ToLower() == nomeTipo.ToLower())!;
+        }
+
+        public void Atualizar(SolicitacaoTransferencia solicitacaoTransferencia)
+        {
+            if (solicitacaoTransferencia == null)
+            {
+                return;
+            }
+
+            SolicitacaoTransferencia solicitacaoBanco = _context.SolicitacaoTransferencia.Find(solicitacaoTransferencia.StatusTransferenciaId)!;
+
+            if (solicitacaoBanco == null)
+            {
+                return;
+            }
+
+            solicitacaoBanco.DataResposta = solicitacaoTransferencia.DataResposta;
+            solicitacaoBanco.StatusTransferenciaId = solicitacaoTransferencia.StatusTransferenciaId;
+            solicitacaoBanco.UsuarioAprovacaoId = solicitacaoTransferencia.UsuarioAprovacaoId;
+
+            _context.SaveChanges();
+        }
+
+        public void AtualizarPatrimonio(Patrimonio patrimonio)
+        {
+            if (patrimonio == null)
+            {
+                return;
+            }
+
+            Patrimonio patrimonioBanco = _context.Patrimonio.Find(patrimonio.PatrimonioId)!;
+
+            if (patrimonioBanco == null)
+            {
+                return;
+            }
+
+            patrimonioBanco.LocalizacaoId = patrimonio.LocalizacaoId;
+            patrimonioBanco.StatusPatrimonioId = patrimonio.StatusPatrimonioId;
+
+            _context.SaveChanges();
+        }
+
+        public void AdicionarLog(LogPatrimonio logPatrimonio)
+        {
+            _context.LogPatrimonio.Add(logPatrimonio);
+            _context.SaveChanges();
         }
 
     }

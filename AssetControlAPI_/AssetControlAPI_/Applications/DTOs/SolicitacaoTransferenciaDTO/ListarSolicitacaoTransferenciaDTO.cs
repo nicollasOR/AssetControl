@@ -2,8 +2,8 @@
 {
     public class ListarSolicitacaoTransferenciaDTO
     {
-        public Guid Transferenciaid { get; set; }
-        public Guid SolicitacaoTransferenciaId {get;set;} 
+        public Guid TransferenciaId { get; set; }
+        public Guid? StatusTransferenciaId {get;set;} 
         public Guid UsuarioIdSolicitacao { get;set;}
         public Guid? UsuarioIdAprovacao { get; set; }
         public Guid localizacaoId { get; set; }
