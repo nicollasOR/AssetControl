@@ -16,10 +16,10 @@ namespace AssetControlAPI_.Controllers
 
 
         [HttpGet]
-        public ActionResult <List<ListarPatrimonioDTO>> Listar()
+        public ActionResult<List<ListarPatrimonioDTO>> Listar()
         {
             List<ListarPatrimonioDTO> listar = _service.Listar();
-                if (listar == null)
+            if (listar == null)
                 return NotFound(listar);
 
             return Ok(listar);

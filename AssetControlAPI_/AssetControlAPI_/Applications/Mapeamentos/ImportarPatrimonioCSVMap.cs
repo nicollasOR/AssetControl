@@ -14,7 +14,7 @@ namespace AssetControlAPI_.Applications.Mapeamentos
 
             // Map -> escolhe a propriedade da DTO
             // Name -> diz qual a coluna do CSV para essa propriedade
-            Map(numeroPatrimonio => numeroPatrimonio.NumeroPatrimonio).Name("N° invent.");
+            Map(numeroPatrimonio => numeroPatrimonio.NumeroPatrimonio).Name("Nº invent.");
             Map(nome => nome.Denominacao).Name("Denominação do imobilizado.");
             Map(DataIncorporacao => DataIncorporacao.DataIncorporacao).Name("Dt.incorp.");
             Map(valorAquisicao => valorAquisicao.ValorAquisicao).Name("ValAquis.");

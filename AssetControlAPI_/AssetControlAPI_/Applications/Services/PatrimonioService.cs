@@ -52,7 +52,7 @@ namespace AssetControlAPI_.Applications.Services
             //}
             //).ToList();
 
-            return listarDTO ;
+            return listarDTO;
         }
 
         public ListarPatrimonioDTO BuscarPorId(Guid id)
@@ -90,34 +90,34 @@ namespace AssetControlAPI_.Applications.Services
             List<ImportarPatrimonioCSVDTO> registros;
             //abrir o arquivo csv
             using (var stream = arquivoCsv.OpenReadStream())
-                using (var reader = new StreamReader(stream))
-                    using (var csv = new CsvReader
-                        (reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-                        { 
-                            //define que o separador é o ;
-                            Delimiter = ";",
-                            
-                            //ignora erros caso o cabecalho nao bata 100%//nao trava as aplicacoes por conta de formatação, vamos tratar os erros depois;
-                            HeaderValidated = null,
+            using (var reader = new StreamReader(stream))
+            using (var csv = new CsvReader
+                (reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    //define que o separador é o ;
+                    Delimiter = ";",
 
-                            //ignora se tiver faltando algum campo
-                            MissingFieldFound = null,
-                            
-                            //ignora dados quebrados no csv
-                            BadDataFound = null,    // 
+                    //ignora erros caso o cabecalho nao bata 100%//nao trava as aplicacoes por conta de formatação, vamos tratar os erros depois;
+                    HeaderValidated = null,
 
-                            //remove espaços extras automaticamente
-                            TrimOptions = TrimOptions.Trim
-                        }
-                        
-                        ))
-                        {
+                    //ignora se tiver faltando algum campo
+                    MissingFieldFound = null,
+
+                    //ignora dados quebrados no csv
+                    BadDataFound = null,    // 
+
+                    //remove espaços extras automaticamente
+                    TrimOptions = TrimOptions.Trim
+                }
+
+                ))
+            {
                 csv.Context.RegisterClassMap<ImportarPatrimonioCSVMap>();
-                registros = csv.GetRecords<ImportarPatrimonioCSVDTO>().ToList();                        
-                        
-                        }
+                registros = csv.GetRecords<ImportarPatrimonioCSVDTO>().ToList();
+
+            }
             var erros = new List<string>();
-            foreach(var item in registros)
+            foreach (var item in registros)
             {
                 //se nao tem numero de patrimonio ignora o registro
                 if (string.IsNullOrWhiteSpace(item.NumeroPatrimonio))
@@ -136,19 +136,19 @@ namespace AssetControlAPI_.Applications.Services
                 string denominacao = item.Denominacao.Trim();
 
                 DateTime? dataIncorporacao = null;
-                
-                if(!string.IsNullOrWhiteSpace(item.DataIncorporacao))
+
+                if (!string.IsNullOrWhiteSpace(item.DataIncorporacao))
                 {
                     if (DateTime.TryParse(item.DataIncorporacao, new CultureInfo("pt-BR"), DateTimeStyles.None, out DateTime dataConvertida))
                         dataIncorporacao = dataConvertida;
                 }
                 decimal? valorAquisicao = null;
-                if(!string.IsNullOrWhiteSpace(item.ValorAquisicao))
+                if (!string.IsNullOrWhiteSpace(item.ValorAquisicao))
                 {
                     //remove separador de milhar e ajusa decimal
                     string valorTexto = item.ValorAquisicao.Replace(".", "").Replace(",", ".");
 
-                    if(decimal.TryParse(valorTexto, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal valorConvertido))
+                    if (decimal.TryParse(valorTexto, NumberStyles.Any, CultureInfo.InvariantCulture, out decimal valorConvertido))
                         valorAquisicao = valorConvertido;
 
                     ValidarCriacaoDTO.ValidarNumeroPatrimonio(numeroPatrimonio);
@@ -191,7 +191,7 @@ namespace AssetControlAPI_.Applications.Services
             }
         }
 
-        
+
 
 
         //public ListarPatrimonioDTO BuscarPorNumeroPatrimonio(string numeroPatrimonio, Guid? patrimonioId = null)

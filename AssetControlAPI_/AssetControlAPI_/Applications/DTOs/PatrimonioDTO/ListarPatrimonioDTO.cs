@@ -7,7 +7,7 @@
 
         public string Denominacao { get; set; } = string.Empty;
 
-        public decimal Valor { get; set; } = decimal.Zero;
+        public decimal? Valor { get; set; }
 
         public string NumeroSerie { get; set; } = string.Empty;
 
