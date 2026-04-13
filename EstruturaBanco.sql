@@ -22,7 +22,6 @@ CREATE TABLE Cidade
 (
 CidadeId				UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
 NomeCidade				VARCHAR(50),
-Estado					VARCHAR(2)
 )
 GO
 
@@ -44,13 +43,10 @@ Logradoura				VARCHAR(100) NOT NULL,
 Numero					INT NOT NULL,
 Complemento				VARCHAR(50),
 CEP						VARCHAR(12) NOT NULL,
-CidadeId				UNIQUEIDENTIFIER NOT NULL,
 BairroId				UNIQUEIDENTIFIER NOT NULL,
 
 CONSTRAINT EnderecoBairro_ID_FK FOREIGN KEY (BairroId) 
 		REFERENCES Bairro(BairroId),
-CONSTRAINT EnderecoCidade_ID_FK FOREIGN KEY (CidadeId) 
-		REFERENCES Cidade(CidadeId) 
 )
 
 
@@ -94,7 +90,7 @@ GO
 CREATE TABLE StatusPatrimonio
 (
 StatusPatrimonioId	    UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
-StatusPatrimonio		VARCHAR(50) NOT NULL,
+NomeStatusPatrimonio	VARCHAR(50) NOT NULL,
 )
 GO
 
@@ -128,7 +124,6 @@ Valor					DECIMAL(10,2) NOT NULL,
 NumeroSerie				VARCHAR(30) UNIQUE NOT NULL,
 Imagem					VARCHAR(MAX) NULL,
 LocalizacaoId			UNIQUEIDENTIFIER NOT NULL,
-TipoPatrimonioId		UNIQUEIDENTIFIER NOT NULL,
 StatusPatrimonioId		UNIQUEIDENTIFIER NOT NULL,
 
 CONSTRAINT FK_PatrimonioLocalizacao_ID  FOREIGN KEY(LocalizacaoId)
@@ -281,13 +276,6 @@ VALUES
 ('Desenvolvedor Full-Stack'),
 ('Analista de Redes')
 
-GO
-
-INSERT INTO TipoPatrimonio(NomeTipo)
-VALUES
-('Hardware'),
-('Móvel'),
-('Notebook')
 
 GO
 
