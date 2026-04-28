@@ -10,8 +10,9 @@ namespace AssetControlAPI_.Repository
     public class AreaRepository : IAreaRepository
 
     {
-        private readonly AssetDBContext _context;
-        public AreaRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+
+        public AreaRepository(AssetDb_Context context) => _context = context;
 
        public List<Area> Listar()
         {

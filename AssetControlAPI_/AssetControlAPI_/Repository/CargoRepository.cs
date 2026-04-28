@@ -7,8 +7,8 @@ namespace AssetControlAPI_.Repository
     public class CargoRepository : ICargoRepository
     {
 
-        private readonly AssetDBContext _context;
-        public CargoRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public CargoRepository(AssetDb_Context context) => _context = context;
 
         public List<Cargo> Listar()
         {

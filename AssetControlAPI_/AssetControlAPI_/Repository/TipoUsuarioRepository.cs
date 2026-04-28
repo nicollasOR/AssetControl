@@ -7,8 +7,8 @@ namespace AssetControlAPI_.Repository
     public class TipoUsuarioRepository : ITipoUsuarioRepository
     {
 
-        private readonly AssetDBContext _context;
-        public TipoUsuarioRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public TipoUsuarioRepository(AssetDb_Context context) => _context = context;
 
         public List<TipoUsuario> Listar()
         {

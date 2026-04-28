@@ -7,12 +7,12 @@ namespace AssetControlAPI_.Repository
     public class StatusPatrimonioRepository : IStatusPatrimonioRepository
     {
 
-        private readonly AssetDBContext _context;
-        public StatusPatrimonioRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public StatusPatrimonioRepository(AssetDb_Context context) => _context = context;
 
         public List<StatusPatrimonio> Listar()
         {
-            return _context.StatusPatrimonio.OrderBy(varAux => varAux.StatusPatrimonio1).ToList();
+            return _context.StatusPatrimonio.OrderBy(varAux => varAux.NomeStatusPatrimonio).ToList();
         }
 
         public StatusPatrimonio BuscarPorId(Guid statusPatrimonioId)
@@ -38,7 +38,7 @@ namespace AssetControlAPI_.Repository
 
             StatusPatrimonio? statusPatrimonioBanco = _context.StatusPatrimonio.Find(statusPatrimonio.StatusPatrimonioId);
 
-            statusPatrimonioBanco.StatusPatrimonio1 = statusPatrimonio.StatusPatrimonio1;
+            statusPatrimonioBanco.NomeStatusPatrimonio = statusPatrimonio.NomeStatusPatrimonio;
 
             _context.SaveChanges();
         }

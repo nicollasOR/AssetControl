@@ -8,8 +8,8 @@ namespace AssetControlAPI_.Repository
     public class BairroRepository : IBairroRepository
     {
 
-        private readonly AssetDBContext _context;
-        public BairroRepository (AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public BairroRepository (AssetDb_Context context) => _context = context;
 
 
         public List<Bairro> Listar()

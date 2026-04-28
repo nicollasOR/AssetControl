@@ -20,7 +20,7 @@ namespace AssetControlAPI_.Applications.Services
                 DataTransferencia = logPatrimonio.DataTransferencia,
                 LogPatrimonioId = logPatrimonio.LogPatrimonioId,
                 PatrimonioId = logPatrimonio.PatrimonioId,
-                StatusPatrimonio = logPatrimonio.StatusPatrimonio.StatusPatrimonio1,
+                StatusPatrimonio = logPatrimonio.StatusPatrimonio.NomeStatusPatrimonio,
                 TipoAlteracao = logPatrimonio.TipoAlteracao.NomeAlteracao
             };
         }

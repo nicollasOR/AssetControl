@@ -55,52 +55,52 @@ namespace AssetControlAPI_.Controllers
         //    }
         //}
 
-        //[HttpPost]
-        //public ActionResult<CriarPatrimonioDTO> Adicionar(ListarPatrimonioDTO criarDTO)
-        //{
-        //    try
-        //    {
-        //        _service.Adicionar(criarDTO);
-        //        return Created();
-        //    }
+        [HttpPost]
+        public ActionResult<CriarPatrimonioDTO> Adicionar(ListarPatrimonioDTO criarDTO)
+        {
+            try
+            {
+                _service.Adicionar(criarDTO);
+                return Created();
+            }
 
-        //    catch (DomainException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-
-
-        //}
-
-        //[HttpPut]
-        //public ActionResult<ListarPatrimonioDTO> Atualizar(Guid id, CriarPatrimonioDTO lerDTO)
-        //{
-        //    try
-        //    {
-        //        _service.Atualizar(id, lerDTO);
-        //        return NoContent();
-        //    }
-
-        //    catch (DomainException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
 
-        //[HttpPatch("tipoPatrimonio/{id}")]
-        //public ActionResult <AtualizarStatusPatrimonioDTO> AtualizarStatus(Guid id, AtualizarStatusPatrimonioDTO criarDTO)
-        //{
-        //    try
-        //    {
-        //        _service.AtualizarStatus(id, criarDTO);
-        //        return NoContent();
-        //    }
+        }
 
-        //    catch (DomainException ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
+        [HttpPut]
+        public ActionResult<ListarPatrimonioDTO> Atualizar(Guid id, CriarPatrimonioDTO lerDTO)
+        {
+            try
+            {
+                _service.Atualizar(id, lerDTO);
+                return NoContent();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpPatch("tipoPatrimonio/{id}")]
+        public ActionResult<AtualizarStatusPatrimonioDTO> AtualizarStatus(Guid id, AtualizarStatusPatrimonioDTO criarDTO)
+        {
+            try
+            {
+                _service.AtualizarStatus(id, criarDTO);
+                return NoContent();
+            }
+
+            catch (DomainException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

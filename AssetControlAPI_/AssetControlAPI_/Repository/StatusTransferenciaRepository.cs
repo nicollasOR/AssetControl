@@ -6,9 +6,9 @@ namespace AssetControlAPI_.Repository
 {
     public class StatusTransferenciaRepository : IStatusTransferenciaRepository
     {
-        private readonly AssetDBContext _context;
+        private readonly AssetDb_Context _context;
 
-        public StatusTransferenciaRepository(AssetDBContext context) => _context = context;
+        public StatusTransferenciaRepository(AssetDb_Context context) => _context = context;
 
         public List<StatusTransferencia> Listar()
         {

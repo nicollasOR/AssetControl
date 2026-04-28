@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using AssetControlAPI_.Applications.Services;
 
 namespace AssetControlAPI_.Controllers
 {

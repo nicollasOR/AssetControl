@@ -8,8 +8,8 @@ namespace AssetControlAPI_.Repository
     public class EnderecoRepository : IEnderecoRepository
     {
 
-        private readonly AssetDBContext _context;
-        public EnderecoRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public EnderecoRepository(AssetDb_Context context) => _context = context;
 
         public List<Endereco> Listar()
         {
@@ -25,18 +25,18 @@ namespace AssetControlAPI_.Repository
         {
             return _context.Endereco.Any(aux => aux.BairroId == bairroId);
         }
-        //public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
-        //{
-        //    var consulta = _context.Endereco.AsQueryable();
+        public Endereco BuscarPorLogradouro(string logradoura, int? numero, Guid bairroId)
+        {
+            var consulta = _context.Endereco.AsQueryable();
 
-        //    return consulta.FirstOrDefault(
-        //        endereco =>
-        //        endereco.Logradoura.ToLower() == logradoura.ToLower() ||
-        //        endereco.Numero == numero ||
-        //        endereco.BairroId == bairroId
-        //        );
+            return consulta.FirstOrDefault(
+                endereco =>
+                endereco.Logradoura.ToLower() == logradoura.ToLower() ||
+                endereco.Numero == numero ||
+                endereco.BairroId == bairroId
+                );
 
-        //}
+        }
 
 
         public Endereco BuscarPorLogradouroENumero(string logradouro, int? numero, Guid bairroId, Guid? enderecoId = null)

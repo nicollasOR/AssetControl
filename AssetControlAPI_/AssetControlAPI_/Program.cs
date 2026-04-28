@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 Env.Load();
 
 string connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")!;
-builder.Services.AddDbContext<AssetDBContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AssetDb_Context>(options => options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
@@ -56,7 +56,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         // Lê a chave secreta definida no appsettings.json.
-        var chave = Environment.GetEnvironmentVariable("JWT_KEY");
+        var chave = Environment.GetEnvironmentVariable("JWT_KEY")
+            ?? builder.Configuration["Jwt:Key"];
         //var chave = builder.Configuration["Jwt:Key"]!;
 
         // Quem emitiu o token.
@@ -123,8 +124,6 @@ builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<ICargoRepository, CargoRepository>();
 builder.Services.AddScoped<CargoService>();
 
-builder.Services.AddScoped<IPatrimonioRepository, PatrimonioRepository>();
-builder.Services.AddScoped<PatrimonioService>();
 
 builder.Services.AddScoped<ILogPatrimonioRepository, LogPatrimonioRepository>();
 builder.Services.AddScoped<LogPatrimonioService>();
@@ -135,6 +134,8 @@ builder.Services.AddScoped<TipoAlteracaoService>();
 builder.Services.AddScoped<ISolicitacaoTransferenciaRepository, SolicitacaoTransferenciaRepository>();
 builder.Services.AddScoped<SolicitacaoTransferenciaService>();
 
+builder.Services.AddScoped<IPatrimonioRepository, PatrimonioRepository>();
+builder.Services.AddScoped<PatrimonioService>();
 
 
 var app = builder.Build();

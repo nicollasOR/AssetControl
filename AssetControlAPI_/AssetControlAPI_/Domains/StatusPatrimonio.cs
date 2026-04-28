@@ -7,7 +7,7 @@ public partial class StatusPatrimonio
 {
     public Guid StatusPatrimonioId { get; set; }
 
-    public string StatusPatrimonio1 { get; set; } = null!;
+    public string NomeStatusPatrimonio { get; set; } = null!;
 
     public virtual ICollection<LogPatrimonio> LogPatrimonio { get; set; } = new List<LogPatrimonio>();
 

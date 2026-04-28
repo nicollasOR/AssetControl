@@ -6,9 +6,9 @@ namespace AssetControlAPI_.Repository
 {
     public class TipoAlteracaoRepository : ITipoAlteracaoRepository
     {
-        private readonly AssetDBContext _context;
+        private readonly AssetDb_Context _context;
 
-        public TipoAlteracaoRepository(AssetDBContext context) => _context = context;
+        public TipoAlteracaoRepository(AssetDb_Context context) => _context = context;
 
         public List<TipoAlteracao> Listar()
         {

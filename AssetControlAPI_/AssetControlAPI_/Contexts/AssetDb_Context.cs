@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssetControlAPI_.Contexts;
 
-public partial class AssetDBContext : DbContext
+public partial class AssetDb_Context : DbContext
 {
-    public AssetDBContext()
+    public AssetDb_Context()
     {
     }
 
-    public AssetDBContext(DbContextOptions<AssetDBContext> options)
+    public AssetDb_Context(DbContextOptions<AssetDb_Context> options)
         : base(options)
     {
     }
@@ -46,13 +46,13 @@ public partial class AssetDBContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AssetDB;Trusted_Connection=True;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=LAPTOP-HULK0D89\\SQLEXPRESS;Database=AssetDb_;Trusted_Connection=True;TrustServerCertificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Area>(entity =>
         {
-            entity.HasKey(e => e.AreaId).HasName("PK__Area__70B82048E55BDA8F");
+            entity.HasKey(e => e.AreaId).HasName("PK__Area__70B8204899794935");
 
             entity.Property(e => e.AreaId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.NomeArea).HasMaxLength(50);
@@ -60,7 +60,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<Bairro>(entity =>
         {
-            entity.HasKey(e => e.BairroId).HasName("PK__Bairro__4A0937C3A017F5F0");
+            entity.HasKey(e => e.BairroId).HasName("PK__Bairro__4A0937C3F0CE26D5");
 
             entity.Property(e => e.BairroId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.NomeBairro)
@@ -75,17 +75,17 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<Cargo>(entity =>
         {
-            entity.HasKey(e => e.CargoId).HasName("PK__Cargo__B4E665CD8DFAEE26");
+            entity.HasKey(e => e.CargoId).HasName("PK__Cargo__B4E665CDFD31687A");
 
             entity.Property(e => e.CargoId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Nome)
-                .HasMaxLength(20)
+                .HasMaxLength(50)
                 .IsUnicode(false);
         });
 
         modelBuilder.Entity<Cidade>(entity =>
         {
-            entity.HasKey(e => e.CidadeId).HasName("PK__Cidade__B680093936A225DF");
+            entity.HasKey(e => e.CidadeId).HasName("PK__Cidade__B680093964F4F558");
 
             entity.Property(e => e.CidadeId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.NomeCidade)
@@ -95,7 +95,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<Endereco>(entity =>
         {
-            entity.HasKey(e => e.EnderecoId).HasName("PK__Endereco__B9D946CF78A9282F");
+            entity.HasKey(e => e.EnderecoId).HasName("PK__Endereco__B9D946CFB9D8B750");
 
             entity.Property(e => e.EnderecoId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.CEP)
@@ -116,7 +116,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<Localizacao>(entity =>
         {
-            entity.HasKey(e => e.LocalizacaoId).HasName("PK__Localiza__83ABDF2AA30A7CE4");
+            entity.HasKey(e => e.LocalizacaoId).HasName("PK__Localiza__83ABDF2A5684542B");
 
             entity.ToTable(tb => tb.HasTrigger("trg_Localizacao_SoftDelete"));
 
@@ -153,7 +153,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<LogPatrimonio>(entity =>
         {
-            entity.HasKey(e => e.LogPatrimonioId).HasName("PK__LogPatri__E716D10B41521C10");
+            entity.HasKey(e => e.LogPatrimonioId).HasName("PK__LogPatri__E716D10B13C4F10A");
 
             entity.Property(e => e.LogPatrimonioId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.DataTransferencia).HasPrecision(0);
@@ -186,11 +186,11 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<Patrimonio>(entity =>
         {
-            entity.HasKey(e => e.PatrimonioId).HasName("PK__Patrimon__C5A60BFE4289B974");
+            entity.HasKey(e => e.PatrimonioId).HasName("PK__Patrimon__C5A60BFEB29E3973");
 
             entity.ToTable(tb => tb.HasTrigger("trg_Patrimonio_SoftDelete"));
 
-            entity.HasIndex(e => e.NumeroSerie, "UQ__Patrimon__C5455177A4CC8D65").IsUnique();
+            entity.HasIndex(e => e.NumeroSerie, "UQ__Patrimon__C54551779C02BCA4").IsUnique();
 
             entity.Property(e => e.PatrimonioId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Denominacao).IsUnicode(false);
@@ -213,7 +213,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<SolicitacaoTransferencia>(entity =>
         {
-            entity.HasKey(e => e.SolicitacaoTransId).HasName("PK__Solicita__D015134364337251");
+            entity.HasKey(e => e.SolicitacaoTransId).HasName("PK__Solicita__D01513436636AA43");
 
             entity.Property(e => e.SolicitacaoTransId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.DataResposta).HasPrecision(0);
@@ -231,7 +231,8 @@ public partial class AssetDBContext : DbContext
 
             entity.HasOne(d => d.StatusTransferencia).WithMany(p => p.SolicitacaoTransferencia)
                 .HasForeignKey(d => d.StatusTransferenciaId)
-                .HasConstraintName("FK_Solicitacao_StatusTransferencia");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SolicitacaoTransferencia_StatusTransferencia_ID");
 
             entity.HasOne(d => d.UsuarioAprovacao).WithMany(p => p.SolicitacaoTransferenciaUsuarioAprovacao)
                 .HasForeignKey(d => d.UsuarioAprovacaoId)
@@ -245,18 +246,17 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<StatusPatrimonio>(entity =>
         {
-            entity.HasKey(e => e.StatusPatrimonioId).HasName("PK__StatusPa__B3F336295678D97D");
+            entity.HasKey(e => e.StatusPatrimonioId).HasName("PK__StatusPa__B3F33629BBFF453F");
 
             entity.Property(e => e.StatusPatrimonioId).HasDefaultValueSql("(newid())");
-            entity.Property(e => e.StatusPatrimonio1)
+            entity.Property(e => e.NomeStatusPatrimonio)
                 .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("StatusPatrimonio");
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<StatusTransferencia>(entity =>
         {
-            entity.HasKey(e => e.StatusTransferenciaId).HasName("PK__StatusTr__7AA82899B4CF5DB0");
+            entity.HasKey(e => e.StatusTransferenciaId).HasName("PK__StatusTr__7AA828997D37EA42");
 
             entity.Property(e => e.StatusTransferenciaId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.StatusTransferencia1)
@@ -267,7 +267,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<TipoAlteracao>(entity =>
         {
-            entity.HasKey(e => e.TipoAlteracaoId).HasName("PK__TipoAlte__9BEF4F6D1BFEC5D2");
+            entity.HasKey(e => e.TipoAlteracaoId).HasName("PK__TipoAlte__9BEF4F6DE96370DE");
 
             entity.Property(e => e.TipoAlteracaoId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.NomeAlteracao).HasMaxLength(50);
@@ -275,7 +275,7 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<TipoUsuario>(entity =>
         {
-            entity.HasKey(e => e.TipoUsuarioId).HasName("PK__TipoUsua__7F22C722FB8D2545");
+            entity.HasKey(e => e.TipoUsuarioId).HasName("PK__TipoUsua__7F22C7220B941450");
 
             entity.Property(e => e.TipoUsuarioId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Nome)
@@ -285,15 +285,15 @@ public partial class AssetDBContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuario__2B3DE7B895D20A4F");
+            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuario__2B3DE7B81948F4D6");
 
             entity.ToTable(tb => tb.HasTrigger("trg_Usuario_SoftDelete"));
 
-            entity.HasIndex(e => e.RG, "UQ__Usuario__321537C8EB5AF2B8").IsUnique();
+            entity.HasIndex(e => e.RG, "UQ__Usuario__321537C884537382").IsUnique();
 
-            entity.HasIndex(e => e.CarteiraTrabalho, "UQ__Usuario__6E25BCA2BB525854").IsUnique();
+            entity.HasIndex(e => e.CarteiraTrabalho, "UQ__Usuario__6E25BCA2EEAE95AE").IsUnique();
 
-            entity.HasIndex(e => e.CPF, "UQ__Usuario__C1F897311D372A1A").IsUnique();
+            entity.HasIndex(e => e.CPF, "UQ__Usuario__C1F89731B4122891").IsUnique();
 
             entity.Property(e => e.UsuarioId).HasDefaultValueSql("(newid())");
             entity.Property(e => e.Ativo).HasDefaultValue(true);
@@ -304,7 +304,9 @@ public partial class AssetDBContext : DbContext
             entity.Property(e => e.Email)
                 .HasMaxLength(150)
                 .IsUnicode(false);
-            entity.Property(e => e.NIF).HasMaxLength(12);
+            entity.Property(e => e.NIF)
+                .HasMaxLength(12)
+                .IsUnicode(false);
             entity.Property(e => e.Nome).HasMaxLength(100);
             entity.Property(e => e.PrimeiroAcesso).HasDefaultValue(true);
             entity.Property(e => e.RG)

@@ -7,8 +7,8 @@ namespace AssetControlAPI_.Repository
     public class LocalizacaoRepository : ILocalizacaoRepository
     {
 
-        private readonly AssetDBContext _context;
-        public LocalizacaoRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public LocalizacaoRepository(AssetDb_Context context) => _context = context;
 
         public List<Localizacao> Listar()
         {

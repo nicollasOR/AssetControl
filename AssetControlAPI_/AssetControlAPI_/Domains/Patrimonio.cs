@@ -17,8 +17,6 @@ public partial class Patrimonio
 
     public Guid LocalizacaoId { get; set; }
 
-    public Guid TipoPatrimonioId { get; set; }
-
     public Guid StatusPatrimonioId { get; set; }
 
     public virtual Localizacao Localizacao { get; set; } = null!;

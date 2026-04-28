@@ -21,15 +21,15 @@ public partial class Usuario
 
     public bool? Ativo { get; set; }
 
+    public bool PrimeiroAcesso { get; set; }
+
+    public string NIF { get; set; } = null!;
+
     public Guid EnderecoId { get; set; }
 
     public Guid CargoId { get; set; }
 
     public Guid TipoUsuarioId { get; set; }
-
-    public bool PrimeiroAcesso { get; set; }
-
-    public string NIF { get; set; } = null!;
 
     public virtual Cargo Cargo { get; set; } = null!;
 

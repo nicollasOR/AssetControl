@@ -8,8 +8,8 @@ namespace AssetControlAPI_.Repository
     public class SolicitacaoTransferenciaRepository : ISolicitacaoTransferenciaRepository
     {
 
-        private readonly AssetDBContext _context;
-        public SolicitacaoTransferenciaRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public SolicitacaoTransferenciaRepository(AssetDb_Context context) => _context = context;
 
         public List<SolicitacaoTransferencia> Listar()
         {
@@ -75,7 +75,7 @@ namespace AssetControlAPI_.Repository
 
         public StatusPatrimonio BuscarStatusPatrimonioPorNome(string nomeStatus)
         {
-            return _context.StatusPatrimonio.FirstOrDefault(status => status.StatusPatrimonio1.ToLower() == nomeStatus.ToLower())!;
+            return _context.StatusPatrimonio.FirstOrDefault(status => status.NomeStatusPatrimonio.ToLower() == nomeStatus.ToLower())!;
         }
 
         public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo)

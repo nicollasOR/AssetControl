@@ -5,8 +5,8 @@ namespace AssetControlAPI_.Interface
 {
     public class CidadeRepository : ICidadeRepository
     {
-        private readonly AssetDBContext _context;
-        public CidadeRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public CidadeRepository(AssetDb_Context context) => _context = context;
 
         public List<Cidade> Listar()
         {

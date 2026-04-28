@@ -8,8 +8,8 @@ namespace AssetControlAPI_.Repository
     public class PatrimonioRepository : IPatrimonioRepository
     {
 
-        private readonly AssetDBContext _context;
-        public PatrimonioRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public PatrimonioRepository(AssetDb_Context context) => _context = context;
 
         public List<Patrimonio> Listar()
         {
@@ -39,7 +39,7 @@ namespace AssetControlAPI_.Repository
 
         public StatusPatrimonio BuscarStatusPatrimonioPorNome(string nomeStatus)
         {
-            return _context.StatusPatrimonio.FirstOrDefault(varAux => varAux.StatusPatrimonio1.ToLower() == nomeStatus.ToLower());
+            return _context.StatusPatrimonio.FirstOrDefault(varAux => varAux.NomeStatusPatrimonio.ToLower() == nomeStatus.ToLower());
         }
         
         public TipoAlteracao BuscarTipoAlteracaoPorNome(string nomeTipo)
@@ -57,10 +57,7 @@ namespace AssetControlAPI_.Repository
         {
             return _context.Patrimonio.Any(varAux => varAux.StatusPatrimonioId == statusPatrimonioId);
         }
-        public bool TipoPatrimonioExiste(Guid tipoPatrimonioId)
-        {
-            return _context.Patrimonio.Any(varAux => varAux.TipoPatrimonioId == tipoPatrimonioId);
-        }
+
 
         public void Adicionar(Patrimonio patrimonio)
         {
@@ -84,7 +81,6 @@ namespace AssetControlAPI_.Repository
             patrimonioBanco.NumeroSerie = patrimonio.NumeroSerie;
             patrimonioBanco.LogPatrimonio = patrimonio.LogPatrimonio;
             patrimonioBanco.StatusPatrimonioId = patrimonio.StatusPatrimonioId;
-            patrimonioBanco.TipoPatrimonioId = patrimonio.TipoPatrimonioId;
         }
 
         public void AtualizarStatus(Patrimonio patrimonio)

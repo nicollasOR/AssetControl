@@ -8,8 +8,8 @@ namespace AssetControlAPI_.Repository
     public class LogPatrimonioRepository : ILogPatrimonioRepository
     {
 
-        private readonly AssetDBContext _context;
-        public LogPatrimonioRepository(AssetDBContext context) => _context = context;
+        private readonly AssetDb_Context _context;
+        public LogPatrimonioRepository(AssetDb_Context context) => _context = context;
 
         public List<LogPatrimonio> Listar()
         {
