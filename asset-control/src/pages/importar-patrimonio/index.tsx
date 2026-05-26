@@ -2,7 +2,7 @@ import Header from "@/src/components/header/Header";
 
 import styles from './home.module.css'
 
-const Home = () => {
+const importarPatrimonio = () => {
     return(
         <>
         <Header/>
@@ -10,3 +10,5 @@ const Home = () => {
         </>
     )
 }
+
+export default importarPatrimonio

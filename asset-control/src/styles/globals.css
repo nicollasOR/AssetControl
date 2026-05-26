@@ -3,15 +3,13 @@
   padding: 0;
   box-sizing: border-box;
 
-  font-family: "Montserrat", sans-serif;
 }
 
 :root {
-  --tamanho-fonte-padrao: 16px;
   --tamanho-fonte-titulo: 35px;
   --tamanho-fonte-subtitulo: 30px;
 
-  --tamanho-fonte-padrao: 16px;
+  --tamanho-fonte-padrao: 20px;
   --tamanho-fonte-titulo: 35px;
   --cor-vermelha: #ce2c2c;
   --cor-fundo: #eef1f5;
@@ -22,4 +20,8 @@
   --fundo: #eef1f5;
   --texto: #111111;
   --cinza-texto: #444444;
+}
+
+.layout_guide{
+  width: 80%;
 }
