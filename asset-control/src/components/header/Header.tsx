@@ -1,48 +1,80 @@
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { faCircleInfo, faChevronDown, faUser, faBars } from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
   return(
 <>
 
-    <header className={styles.topbar}>
-        <nav className={`${styles.navbar} layout_guide`} aria-label="Menu principal">
-            <a href="#" className={styles.logoLink} aria-label="Página inicial">
-                <img src="../imgs/Logo Senai.png" className={styles.logo} alt="" />
-            </a>
+   <header className={styles.topbar}>
+    <nav
+        className={`${styles.navbar} layout_guide`}
+        aria-label="Menu principal"
+    >
+        <a
+            href="#"
+            className={styles.logo_link}
+            aria-label="Página inicial"
+        >
+            <img
+                src="../imgs/Logo Senai.png"
+                alt="Logo SENAI"
+                className={styles.logo}
+            />
+        </a>
 
-            <ul className={styles.e}>
-                <li>
-                    <a href="#" className={styles.menuLink}>
-                        Ambientes
-                        <i className="fa-solid fa-chevron-down"></i>
-                    </a>
-                </li>
+        <ul className={styles.menu_list}>
+            <li>
+                <a
+                    href="#"
+                    className={styles.menu_link}
+                >
+                    Ambientes
+                    <FontAwesomeIcon icon={faChevronDown} />
+                </a>
+            </li>
 
-                <li>
-                    <a href="#" className={styles.menuLink}>Patrimônios</a>
-                </li>
-            </ul>
+            <li>
+                <a
+                    href="#"
+                    className={styles.menu_link}
+                >
+                    Patrimônios
+                </a>
+            </li>
+        </ul>
 
-            <section className={styles.userArea} aria-label="Informações do usuário">
-                <button className="user-icon" aria-label="Abrir perfil do usuário">
-                    <i className="fa-solid fa-user"></i>
-                </button>
-
-                <div className="user-info">
-                    <strong>Késsia Milena</strong>
-                    <span>kessia@sp.senai.br</span>
-                </div>
-
-                <button className="arrow-button" aria-label="Abrir opções da conta">
-                    <i className="fa-solid fa-chevron-down"></i>
-                </button>
-            </section>
-            <button className="hamburguer" aria-label="Abrir opções de menu ">
-                <i className="fa-solid fa-bars"></i>
+        <section
+            className={styles.user_area}
+            aria-label="Informações do usuário"
+        >
+            <button
+                className={styles.user_icon}
+                aria-label="Abrir perfil do usuário"
+            >
+                <FontAwesomeIcon icon={faUser}/>
             </button>
-        </nav>
-    </header>
+
+            <div className={styles.user_info}>
+                <strong>Késsia Milena</strong>
+                <span>kessia@sp.senai.br</span>
+            </div>
+
+            <button
+                className={styles.arrow_button}
+                aria-label="Abrir opções da conta"
+            >
+                <FontAwesomeIcon icon={faChevronDown} />
+            </button>
+        </section>
+
+        <button
+            className={styles.hamburguer}
+            aria-label="Abrir opções de menu"
+        >
+            <FontAwesomeIcon icon={faBars} />
+        </button>
+    </nav>
+</header>
 
 </>
 

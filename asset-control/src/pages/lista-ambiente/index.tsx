@@ -1,75 +1,119 @@
 import Header from "@/src/components/header/Header"
+import styles from './listaAmbiente.module.css'
 
 const listaAmbiente = () => {
+
+  return(
     <>
     <Header/>
  
-<main className="page-content">
-  <section className="page-header layout_guide" aria-labelledby="titulo-ambientes">
-    <h1 id="titulo-ambientes">
-      Ambientes
-    </h1>
-    <form className="search-area" role="search">
-      <label htmlFor="pesquisa-ambiente" className="sr-only">
-        Pesquisar ambiente
-      </label>
-      <input type="search" id="pesquisa-ambiente" name="pesquisaAmbiente" placeholder="Pesquise o ambiente" />
-      <button type="button" className="filter-button" aria-label="Filtrar ambientes">
-        <i className="fa-solid fa-sliders" />
-      </button>
-    </form>
-  </section>
-  <section className="table-section layout_guide" aria-label="Lista de ambientes">
-    <table className="environment-table">
-      <thead>
-        <tr>
-          <th>
-            Local
-          </th>
-          <th>
-            Responsável
-          </th>
-          <th>
-            Detalhes
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr className="">
-          <td>
-            Sala 30/31 (anfiteatro)
-          </td>
-          <td>
-            Samanta Melissa
-          </td>
-          <td>
-            <a href="#" aria-label="Ver detalhes da Sala 30/31">
-              <i className="fa-solid fa-circle-info" />
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-  <nav className="pagination" aria-label="Paginação">
-    <button type="button" className="pagination-button" aria-label="Página anterior">
-      ‹
-    </button>
-    <a href="#" className="pagination-link current" aria-current="page">
-      1
-    </a>
-    <a href="#" className="pagination-link">
-      2
-    </a>
-    <a href="#" className="pagination-link">
-      3
-    </a>
-    <button type="button" className="pagination-button" aria-label="Próxima página">
-      ›
-    </button>
-  </nav>
+<main className={`page_content`}>
+    <section
+        className={`${styles.page_header} layout_guide`}
+        aria-labelledby="titulo-ambientes"
+    >
+        <h1 id={styles.titulo_ambientes}>Ambientes</h1>
+
+        <form className={styles.search_area} role="search">
+            <label
+                htmlFor="pesquisa-ambiente"
+                className={styles.sr_only}
+            >
+                Pesquisar ambiente
+            </label>
+
+            <input
+                type="search"
+                id="pesquisa-ambiente"
+                name="pesquisaAmbiente"
+                placeholder="Pesquise o ambiente"
+            />
+
+            <button
+                type="button"
+                className={styles.filter_button}
+                aria-label="Filtrar ambientes"
+            >
+                <i className="fa-solid fa-sliders"></i>
+            </button>
+        </form>
+    </section>
+
+    <section
+        className={`${styles.table_section} ${styles.layout_guide}`}
+        aria-label="Lista de ambientes"
+    >
+        <table className={styles.environment_table}>
+            <thead>
+                <tr>
+                    <th>Local</th>
+                    <th>Responsável</th>
+                    <th>Detalhes</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Sala 30/31 (anfiteatro)</td>
+                    <td>Samanta Melissa</td>
+                    <td>
+                        <a
+                            href="#"
+                            aria-label="Ver detalhes da Sala 30/31"
+                        >
+                            <i className="fa-solid fa-circle-info"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <nav
+        className={styles.pagination}
+        aria-label="Paginação"
+    >
+        <button
+            type="button"
+            className={styles.pagination_button}
+            aria-label="Página anterior"
+        >
+            ‹
+        </button>
+
+        <a
+            href="#"
+            className={`${styles.pagination_link} ${styles.current}`}
+            aria-current="page"
+        >
+            1
+        </a>
+
+        <a
+            href="#"
+            className={styles.pagination_link}
+        >
+            2
+        </a>
+
+        <a
+            href="#"
+            className={styles.pagination_link}
+        >
+            3
+        </a>
+
+        <button
+            type="button"
+            className={styles.pagination_button}
+            aria-label="Próxima página"
+        >
+            ›
+        </button>
+    </nav>
 </main>
     </>
+  )
 }
 
 export default listaAmbiente
