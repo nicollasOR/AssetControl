@@ -11,33 +11,36 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import cardPatrimonio from "../patrimonio/patrimonio";
 import { useState } from "react";
+import ReactPaginate from "react-paginate";
 
-interface Patrimonio{
-    patrimonioId: string,
-    patrimonio: string,
-    denominacacao: string,
-    tipo: string, 
-    dataTransferencia: string,
-    statusPatrimonio: string
-}
+type Patrimonio = {
+  patrimonioId: string;
+  patrimonio: string;
+  denominacacao: string;
+  tipo: string;
+  dataTransferencia: string;
+  statusPatrimonio: string;
+};
 
 const listaPatrimonio = () => {
+  const [patrimonio, setPatrimonio] = useState<Patrimonio[]>([]);
+  const [pesquisa, setPesquisa] = useState("");
+  const [estaAutenticado, setEstaAutenticado] = useState(false);
+  const [ordem, setOrdem] = useState("todos");
 
-    const [patrimonio, setPatrimonio] = useState<Patrimonio[]>([])
-    const [pesquisa, setPesquisa] = useState("")
+  const [primeiroItem, setPrimeiroItem] = useState(0);
+  const numItem = 6;
+  const ultimoPatrimonio = primeiroItem + numItem;
+  const patrimoniosAtuais = patrimonio.slice(primeiroItem, ultimoPatrimonio);
+  const paginas = Math.ceil(patrimonio.length / numItem);
 
+  const alterarPagina = (event: any) => {
+    const newOffSet = (event.selected * numItem) % patrimonio.length;
 
+    setPrimeiroItem(newOffSet);
+  };
 
-
-
-    const patrimoniosFiltrados = patrimonio.filter((patrimonios) => patrimonios.denominacacao.toLowerCase().includes(pesquisa.toLowerCase()))
-    /*
-    
-    
-    */
-
-
-
+  // const patrimoniosFiltrados = patrimonio.filter((patrimonios) => patrimonios.denominacacao.toLowerCase().includes(pesquisa.toLowerCase()))
 
   return (
     <>
@@ -69,24 +72,24 @@ const listaPatrimonio = () => {
         </form>
       </section>
 
-          <section
+      <section
         className={`${styles.table_section} layout_guide`}
         aria-label="Lista de patrimonios"
-    >
+      >
         <table className={styles.environment_table}>
-            <thead>
-                <tr>
-                    <th>Patrimônio</th>
-                    <th>Denominação</th>
-                    <th>Tipo</th>
-                    <th>Data transfêrencia</th>
-                    <th>Detalhes</th>
-                    <th>Transferir</th>
-                </tr>
-            </thead>
+          <thead>
+            <tr>
+              <th>Patrimônio</th>
+              <th>Denominação</th>
+              <th>Tipo</th>
+              <th>Data transfêrencia</th>
+              <th>Detalhes</th>
+              <th>Transferir</th>
+            </tr>
+          </thead>
 
-            <tbody>
-                {patrimoniosFiltrados.length > 0 ? patrimoniosFiltrados.map((item) => (
+          <tbody>
+            {/* {patrimoniosFiltrados.length > 0 ? patrimoniosFiltrados.map((item) => (
                     <cardPatrimonio
                     
                     />
@@ -95,54 +98,31 @@ const listaPatrimonio = () => {
                 (
                     <>
                     </>
-                ) }
-            </tbody>
+                ) } */}
+          </tbody>
         </table>
-    </section>
+      </section>
 
-    <nav
-        className={styles.pagination}
-        aria-label="Paginação"
-    >
-        <button
-            type="button"
-            className={styles.pagination_button}
-            aria-label="Página anterior"
-        >
-            ‹
-        </button>
+      <nav className={styles.pagination} aria-label="Paginação">
+          <ReactPaginate
+            containerClassName={styles.pagination}
+            breakLabel="..."
+            previousLabel={"<"}
+            nextLabel={">"}
+            previousLinkClassName={styles.pagination_button}
+            nextLinkClassName={styles.pagination_button}
+            
+            renderOnZeroPageCount={null}
 
-        <a
-            href="#"
-            className={`${styles.pagination_link} ${styles.current}`}
-            aria-current="page"
-        >
-            1
-        </a>
-
-        <a
-            href="#"
-            className={styles.pagination_link}
-        >
-            2
-        </a>
-
-        <a
-            href="#"
-            className={styles.pagination_link}
-        >
-            3
-        </a>
-
-        <button
-            type="button"
-            className={styles.pagination_button}
-            aria-label="Próxima página"
-        >
-            ›
-        </button>
-    </nav>
+            pageClassName={styles.pagination_button}
+            activeClassName={styles.current}
+            breakLinkClassName={styles.pagination_link}
+            
+            onPageChange={alterarPagina}
+            pageRangeDisplayed={paginas}
+            pageCount={paginas}
+          />
+      </nav>
     </>
   );
 };
-

@@ -1,6 +1,8 @@
 import styles from "./header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo, faChevronDown, faUser, faBars } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import EX_Imp_Card from "../impor_export/exportarComponent";
 const Header = () => {
   return(
 <>
@@ -15,11 +17,13 @@ const Header = () => {
             className={styles.logo_link}
             aria-label="Página inicial"
         >
+            {/* <Link href={""}> */}
             <img
                 src="../imgs/Logo Senai.png"
                 alt="Logo SENAI"
                 className={styles.logo}
             />
+            {/* </Link> */}
         </a>
 
         <ul className={styles.menu_list}>
