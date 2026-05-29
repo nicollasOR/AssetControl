@@ -72,7 +72,7 @@ namespace GestaoPatrimonios.Repositories
             {
                 return;
             }
-
+            
             patrimonioBanco.StatusPatrimonioID = patrimonio.StatusPatrimonioID;
 
             _context.SaveChanges();
