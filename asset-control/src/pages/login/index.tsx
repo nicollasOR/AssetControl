@@ -6,17 +6,27 @@ import { useState } from "react";
 import { login } from "../api/autenticacaoService";
 import { erro, notificacao } from "@/src/utils/toast";
 
+
 const Login = () => {
+
+  const routes = useRouter()
+  
+
   const [nif, setNIF] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
 
   const notificacao = (msg: string) => toast.success(msg);
+
+
 
   async function autenticar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     try {
       await login(nif, senha);
       notificacao("Login bem sucedido");
+      setTimeout(() => {
+        routes.push("lista-patrimonio/")
+      }, 2000)
     } catch (error: any) {
       erro(error.message);
     }

@@ -1,6 +1,17 @@
+import { toFormData } from "axios";
 import { api } from "./api";
 
 type patrimonioListar ={
+    patrimonioID: string,
+    denominacao: string,
+    numeroPatrimonio: string,
+    valor: string,
+    imagem: string,
+    localizacaoID: string
+    statusPatrimonioID: string
+}
+
+type patrimonioPost = {
     patrimonioID: string,
     denominacao: string,
     numeroPatrimonio: string,
@@ -18,33 +29,23 @@ export class patrimonio_TSX {
         formData.append("denominacao", dados.denominacao)
         formData.append("numeroPatrimonio", dados.numeroPatrimonio)
         formData.append("valor", dados.valor)
-        if (dados.imagem) {
-            formData.append("imagem", dados.imagem);
-        }
+        // if (dados.imagem) {
+        //     formData.append("imagem", dados.imagem);
+        // }
         formData.append("localizacaoID", dados.localizacaoID)
         formData.append("statusPatrimonioID", dados.statusPatrimonioID)
 
         return formData
     }
 
-    static toImagemURL(patrimonio: patrimonioListar){
-        return{
-                        ...patrimonio,
-            imagemURL: `${api.defaults.baseURL}${patrimonio.imagem}`
-        }
-        
-    }
+
 }
 export async function listarPatrimonio ()
 {
     try{
         const response = await api.get("Patrimonio")
-        
-        const patrimonios = response.data.filter((patrimonioVar: patrimonioListar) => {
-            patrimonioVar.statusPatrimonioID != null
-        })
-
-        return patrimonios
+        console.log(response.data)        
+        return response.data
     }
 
     catch(error: any){
@@ -53,6 +54,32 @@ export async function listarPatrimonio ()
 
 }
 
-export async function adicionarPatrimonio(){
 
+//! Tentar fazer post com csv, pesquisar depois
+export async function adicionarPatrimonio(dados: patrimonioPost){
+    try{
+        const formData = patrimonio_TSX.toFormData(dados)
+        const response = await api.post("Patrimonio", dados)
+        return response
+    }
+
+    catch(error: any)
+    {
+        throw new Error(error.response.data)
+    }
+
+}
+
+
+export async function buscarPatrimonioId(Id: string){
+    try{
+    const response = await api.get("Patrimonio" + Id)
+    const patrimonioLink = {
+        ...response.data
+    }
+    return patrimonioLink
+    }
+    catch(error: any){
+        throw new Error(error.response.data)
+    }
 }

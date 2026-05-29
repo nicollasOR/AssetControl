@@ -3,15 +3,15 @@ import styles from './listaPatrimonio.module.css'
 
 import { faCircleInfo, faChevronDown, faUser, faBars, faSliders, faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import ListaPatrimonioC from "@/src/components/lista-patrimonio/listaPatrimonio";
 
 const listaPatrimonio = () => {
   return (
     <>
       <Header />
-
     <main className={`page_content`}>
-    <section
+    <ListaPatrimonioC/>
+    {/* <section
         className={`${styles.page_header} layout_guide`}
         aria-labelledby="titulo-patrimonios"
     >
@@ -134,7 +134,8 @@ const listaPatrimonio = () => {
         >
             ›
         </button>
-    </nav>
+    </nav> */}
+    
 </main>
     </>
   );

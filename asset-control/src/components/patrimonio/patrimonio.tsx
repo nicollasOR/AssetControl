@@ -14,7 +14,7 @@ type Patrimonio = {
 
 }
 
-const cardPatrimonio = ({
+const CardPatrimonio = ({
     patrimonioId,
     patrimonio,
     denominacao,
@@ -24,29 +24,31 @@ const cardPatrimonio = ({
     onTransferir
 
 }: Patrimonio) => {
+
+  const teste = new Date(dataTransferencia).toLocaleDateString("pt-BR")
+  console.log(`oi para todos, ${teste}` )
   return (
-    <>
-      <tr className={styles.tabela} >
+    // <>
+      <tr className={styles.tabela} key={patrimonioId}>
         <td>{patrimonio}</td>
         <td>{denominacao}</td>
         <td>{tipo}</td>
-        <td>{converterData(dataTransferencia)}</td>
+        <td>{new Date(dataTransferencia).toLocaleDateString("pt-BR")}</td>
+        
+        
 
         <td>
-          <Link href={"patrimonio?id=" + patrimonioId}><a href="#" aria-label="Ver detalhes do patrimonio">
+          <Link href={"patrimonio?id=" + patrimonioId}> 
             <FontAwesomeIcon icon={faCircleInfo} />
-          </a>
           </Link>
         </td>
 
         <td>
-          <a href="#" aria-label="Transferir patrimonio">
-            <Link href={""}><FontAwesomeIcon icon={faArrowRightArrowLeft} /></Link>
-          </a>
+            <Link href={"/detalhe-patrimonio"}><FontAwesomeIcon icon={faArrowRightArrowLeft} /></Link>
         </td>
       </tr>
-    </>
+    // </>
   );
 };
 
-export default cardPatrimonio;
+export default CardPatrimonio;
