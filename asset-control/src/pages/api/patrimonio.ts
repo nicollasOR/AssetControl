@@ -83,3 +83,25 @@ export async function buscarPatrimonioId(Id: string){
         throw new Error(error.response.data)
     }
 }
+
+
+export async function importarPatrimonioCSV(arquivos: File){
+
+    try{
+        const response = await api.post("Patrimonio/importar-csv", File)
+        const formData = new FormData()
+        formData.append("arquivoCsv", arquivos)
+
+        await api.post("Patrimonio/importar-csv", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })
+
+    }
+
+    catch(error: any)
+    {
+        throw new Error(error.response.data)
+    }
+}
