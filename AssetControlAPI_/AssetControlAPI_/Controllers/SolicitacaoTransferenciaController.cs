@@ -17,7 +17,7 @@ namespace AssetControlAPI_.Controllers
         private readonly SolicitacaoTransferenciaService _service;
         public SolicitacaoTransferenciaController(SolicitacaoTransferenciaService service) => _service = service;
 
-        [Authorize]
+        // [Authorize]
         [HttpGet]
         public ActionResult<List<ListarSolicitacaoTransferenciaDTO>> Listar()
         {
